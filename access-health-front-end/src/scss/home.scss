@@ -1,0 +1,89 @@
+.main-background {
+  background: url('/img/main-background.jpg');
+  background-position-y: -40px;
+  padding: 150px;
+  background-size: cover;
+  text-align: center;
+
+  h3, h5 {
+  	color: white;
+  	text-shadow: 1px 1px 3px black;
+
+  }
+
+  button {
+  	margin-top: 1rem;
+  	padding: 15px;
+  	font-size: 1.2rem;
+  	color: white;
+  	background-color: #26476dab;
+  	border-color: white;
+  	text-shadow: 1px 1px 3px black;
+  }
+}
+
+.home-create-campaign {
+  padding: 1.2rem;
+  text-align: center;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, #1968d2c9 0%, #6c6cbb 35%, #26476d 100%);
+  display: flex;
+  justify-content: center;
+
+  h6 {
+  	color: white;
+    padding-right: 10px;
+    margin-top: 3px;
+  }
+
+  button {
+    color: white;
+    border-color: white;
+  }
+}
+
+.campaigns-to-support {
+
+  padding: 2rem;
+
+  h4 {
+    text-align: center;
+  }
+
+  .MuiPaper-root-10 {
+    height: 40vh;
+  }
+
+  #campaigns-to-support {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 2rem;
+  text-align: center;
+  }
+
+  #campaigns-to-support > div {
+    margin: 1rem;
+  }
+
+  .home-card {
+    min-height: 20vh;
+  }
+
+  .progress-bar {
+    position: relative;
+    height: 10px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 25px;
+    border: 1px solid #333;
+  }
+
+  .filler {
+    background: #4f86da;
+    height: 100%;
+    border-radius: inherit;
+    transition: width .2s ease-in;
+  }
+}
+
+
