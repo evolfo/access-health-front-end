@@ -32,3 +32,18 @@
   	}
   }
 }
+
+.footer-wrapper {
+  .footer {
+    position: absolute;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background-color: #26476d;
+    text-align: center;
+
+    span {
+      color: white;
+    }
+  }
+}

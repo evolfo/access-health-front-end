@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar'
 import Routes from './components/Routes'
+import Footer from './components/Footer'
 import { BrowserRouter } from 'react-router-dom'
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar />  
-            <Routes />
+          <Routes />
+          <Footer />
         </div>
       </BrowserRouter>
     );
