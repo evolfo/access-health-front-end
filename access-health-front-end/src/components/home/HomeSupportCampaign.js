@@ -1,12 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
+import CampaignCard from './CampaignCard'
 
 const HomeSupportCampaign = props => {
 
@@ -20,26 +15,7 @@ const HomeSupportCampaign = props => {
   if (homeCampaigns[0]) {
 	  homeCampaignsGenerator = homeCampaigns.map(campaign => {
 	  	return (
-	  		<Grid key={campaign.id} item xs={4}>
-		      <Card>
-			    <CardActionArea>
-			      <CardMedia
-			        className="home-card"
-			        image="/img/placeholder1.jpg"
-			        title={campaign.title}
-			      />
-			      <CardContent>
-			        <Typography gutterBottom variant="h6" component="h2">
-			          {campaign.title}
-			        </Typography>
-				    <Typography component="p">
-			          {campaign.description}
-			        </Typography>
-			      </CardContent>
-			    </CardActionArea>
-			  <ProgressBar />
-			  </Card>
-		    </Grid>
+	  	  <CampaignCard key={campaign.id} campaign={campaign} />
 	  	)
 	  })
     }

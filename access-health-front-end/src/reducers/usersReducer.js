@@ -31,6 +31,18 @@ const usersReducer = (state = initialState, action) => {
         error: null
       }
 
+    case "CREATE_USER":
+      localStorage.setItem("token", action.payload.jwt)
+      return {
+        ...state,
+        user: action.payload.user,
+        pendingRequest: false,
+        error: null
+      }
+
+    case "GET_USERS":
+      return {...state, ...action.payload}
+
     case "LOG_IN_ERROR":
       return Object.assign({}, state, { error: action.payload });
  

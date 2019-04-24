@@ -31,8 +31,9 @@ class LoginModal extends Component {
 		setTimeout(() => {
 			if(localStorage.token) {
 			  this.props.history.push('/')
+			  window.alert('You are signed in!')
 			} else {
-			  window.alert('didnt work')
+			  window.alert('Please try again')
 			}
 		}, 200)
 	}
@@ -45,7 +46,7 @@ class LoginModal extends Component {
 		  aria-labelledby="form-dialog-title"
 		>
 		  <DialogTitle id="form-dialog-title">Login</DialogTitle>
-		    <form handleSubmit={this.handleSubmit}>
+		    <form>
 			  <DialogContent>
 			    <TextField
 			      required

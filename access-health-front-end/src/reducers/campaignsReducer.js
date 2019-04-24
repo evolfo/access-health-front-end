@@ -1,7 +1,3 @@
-import {
-  GET_CAMPAIGNS
-} from '../actions/campaignActions';
-
 const initialState = {
   campaigns: []
 }

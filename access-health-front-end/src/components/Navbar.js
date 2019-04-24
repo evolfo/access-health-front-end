@@ -8,6 +8,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import LoginModal from './LoginModal'
 import SignupModal from './SignupModal'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import IconButton from '@material-ui/core/IconButton';
 
 import { logOut } from '../actions/userActions'
 
@@ -39,6 +41,7 @@ class Navbar extends Component {
   }
  
   render() {
+    const username = this.props.users.user.first_name
     return (
     	<div className="navbar">
         <AppBar position="static">
@@ -62,7 +65,14 @@ class Navbar extends Component {
                 <SignupModal open={this.state.signupOpen} handleClickOpen={this.handleSignupClickOpen} handleClose={this.handleSignupClose} /> 
               </React.Fragment>
               :
-              <Button onClick={this.handleLogOut} color="inherit">Logout</Button>
+              <React.Fragment>
+                <Button onClick={this.handleLogOut} color="inherit">Logout</Button>
+                <Link to={`/profile/${username}`}>
+                  <IconButton color="inherit">
+                    <AccountCircle />
+                  </IconButton>
+                </Link>
+              </React.Fragment>
               }
             </div>
           </Toolbar>
@@ -73,7 +83,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => {
-  return state.users.user
+  return state
 }
 
 export default connect(mapStateToProps, { logOut })(Navbar)

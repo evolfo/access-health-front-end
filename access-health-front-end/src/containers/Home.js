@@ -32,6 +32,5 @@ const mapStateToProps = state => {
   	campaigns: state.campaigns
   }
 }
-
  
 export default connect(mapStateToProps, { loadCampaigns })(Home);

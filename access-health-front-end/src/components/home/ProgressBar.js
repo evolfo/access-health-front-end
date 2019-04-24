@@ -3,11 +3,12 @@ import Filler from './Filler'
 import Typography from '@material-ui/core/Typography';
 
 const ProgressBar = props => {
+
   return (
   	<div className="progress-bar">
-  	  <Filler />
+  	  <Filler percentComplete={props.percentComplete} />
   	  <Typography variant="h6">
-  	    50% done
+  	    {props.percentComplete}% done
   	  </Typography>
   	</div>
   )
