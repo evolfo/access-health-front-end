@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { withRouter } from "react-router";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -37,11 +38,17 @@ class Navbar extends Component {
   };
 
   handleLogOut = () => {
+    this.props.history.push('/')
     this.props.logOut();
+
   }
  
   render() {
-    const username = this.props.users.user.first_name
+    let username = ''
+    
+    if (localStorage.token !== "undefined") { 
+      username = this.props.users.user.first_name
+    }  
     return (
     	<div className="navbar">
         <AppBar position="static">
@@ -57,7 +64,7 @@ class Navbar extends Component {
               />
             </div>
             <div className="login-signup">
-              { !localStorage.token ? 
+              { !localStorage.token || localStorage.token === "undefined" ? 
               <React.Fragment>
                 <Button onClick={this.handleLoginClickOpen} color="inherit">Login</Button>
                 <LoginModal open={this.state.loginOpen} handleClickOpen={this.handleLoginClickOpen} handleClose={this.handleLoginClose} />
@@ -86,4 +93,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { logOut })(Navbar)
+export default withRouter(connect(mapStateToProps, { logOut })(Navbar))

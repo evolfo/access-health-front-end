@@ -33,7 +33,7 @@ class Api::V1::CampaignsController < ApplicationController
   private
 
   def campaign_params
-  	params.require(:campaign).permit(:title, :description, :goal)
+  	params.require(:campaign).permit(:title, :description, :goal, :campaign_end)
   end
 
   def find_campaign

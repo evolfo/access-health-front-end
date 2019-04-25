@@ -24,7 +24,7 @@ class Api::V1::DonationsController < ApplicationController
   private
 
   def donation_params
-  	params.require(:donation).permit(:amount, :user_id, :campaign:id, :message)
+  	params.require(:donation).permit(:amount, :user_id, :campaign_id, :message)
   end
 
   def find_donation

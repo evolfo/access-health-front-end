@@ -1,5 +1,5 @@
 class DonationSerializer < ActiveModel::Serializer
-  attributes :id, :amount, :message
+  attributes :amount, :message, :campaign_title, :campaign_owner
 
   belongs_to :user
 end

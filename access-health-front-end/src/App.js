@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Navbar from './components/Navbar'
 import Routes from './components/Routes'
 import Footer from './components/Footer'
@@ -20,7 +20,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar />  
-          <Routes users={this.props.users} />
+          <Routes campaigns={this.props.campaigns.campaigns} currentUser={this.props.users.user} />
           <Footer />
         </div>
       </BrowserRouter>

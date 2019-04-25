@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CampaignCard from './CampaignCard'
@@ -12,10 +13,14 @@ const HomeSupportCampaign = props => {
   	homeCampaigns.push(props.campaigns.campaigns[i])
   }
 
-  if (homeCampaigns[0]) {
+  if (homeCampaigns[0] && homeCampaigns[1]) {
 	  homeCampaignsGenerator = homeCampaigns.map(campaign => {
+	  	let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
+
 	  	return (
-	  	  <CampaignCard key={campaign.id} campaign={campaign} />
+	  	  <Link to={`/browse/${urlEnding}`} key={campaign.id}>
+	  	    <CampaignCard key={campaign.id} campaign={campaign} />
+	  	  </Link>
 	  	)
 	  })
     }

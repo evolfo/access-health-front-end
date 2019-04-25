@@ -13,8 +13,8 @@ import { withRouter } from "react-router-dom";
 class SignupModal extends Component {
 
   state = {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: ''
   }
@@ -53,7 +53,7 @@ class SignupModal extends Component {
               onChange={this.handleChange}
               required
               autoFocus
-              id="firstName"
+              id="first_name"
               margin="dense"
               label="First Name"
               type="text"
@@ -63,7 +63,7 @@ class SignupModal extends Component {
               onChange={this.handleChange}
               required
               autoFocus
-              id="lastName"
+              id="last_name"
               margin="dense"
               label="Last Name"
               type="text"

@@ -29,7 +29,7 @@ class LoginModal extends Component {
 		this.props.handleClose()
 		this.props.getAuth(this.state)
 		setTimeout(() => {
-			if(localStorage.token) {
+			if(localStorage.token && localStorage.token != "undefined") {
 			  this.props.history.push('/')
 			  window.alert('You are signed in!')
 			} else {

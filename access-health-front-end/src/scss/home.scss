@@ -61,29 +61,41 @@
   text-align: center;
   }
 
-  #campaigns-to-support > div {
+  #campaigns-to-support > a > div {
     margin: 1rem;
+    max-width: 100%;
   }
 
   .home-card {
     min-height: 20vh;
   }
 
-  .progress-bar {
+}
+
+.filler {
+    background: #4f86da;
+    height: 100%;
+    border-radius: inherit;
+    transition: width .2s ease-in;
+  }
+
+.progress-bar {
     position: relative;
     height: 10px;
     width: 80%;
     margin: 0 auto;
     border-radius: 25px;
     border: 1px solid #333;
-  }
+    
+    h6 {
+      display: inline-block;
+    }
 
-  .filler {
-    background: #4f86da;
-    height: 100%;
-    border-radius: inherit;
-    transition: width .2s ease-in;
-  }
+    span {
+      padding-top: .25rem;
+      float: right;
+      font-size: 1.2rem;
+    }
 }
 
 

@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
-Donation.destroy_all
-Campaign.destroy_all
+# User.destroy_all
+# Donation.destroy_all
+# Campaign.destroy_all
 
 User.create(first_name: 'ang', last_name: 'spa', email: 'ang@gmail.com', password: "hi")
 User.create(first_name: 'ange', last_name: 'spam', email: 'ange@gmail.com', password: 'yo')
@@ -17,11 +17,11 @@ User.create(first_name: 'latri', last_name: 'pottt', email: 'pottt@gmail.com', p
 User.create(first_name: 'discus', last_name: 'sion', email: 'sion@ymail.com', password: 'yo')
 User.create(first_name: 'mneear', last_name: 'verdunn', email: 'ma1349da@hotmail.com', password: 'yo')
 
-Campaign.create(title: 'Curing cancer', description: Faker::Lorem.sentence(15), user_id: 1, goal: 10000)
-Campaign.create(title: 'all diseases are gone', description: Faker::Lorem.sentence(15), user_id: 2, goal: 5000)
-Campaign.create(title: 'broke mah bone', description: Faker::Lorem.sentence(15), user_id: 3, goal: 3000)
-Campaign.create(title: 'mental health bills', description: Faker::Lorem.sentence(15), user_id: 4, goal: 2000)
-Campaign.create(title: 'got theh rabies', description: Faker::Lorem.sentence(15), user_id: 5, goal: 1000)
+Campaign.create(title: 'Curing cancer', description: Faker::Lorem.sentence(100), user_id: 1, goal: 10000)
+Campaign.create(title: 'all diseases are gone', description: Faker::Lorem.sentence(100), user_id: 2, goal: 5000)
+Campaign.create(title: 'broke mah bone', description: Faker::Lorem.sentence(100), user_id: 3, goal: 3000)
+Campaign.create(title: 'mental health bills', description: Faker::Lorem.sentence(100), user_id: 4, goal: 2000)
+Campaign.create(title: 'got theh rabies', description: Faker::Lorem.sentence(100), user_id: 5, goal: 1000)
 
 Donation.create(amount: 100, message: 'hi', user_id: 1, campaign_id: 2)
 Donation.create(amount: 200, message: 'yo', user_id: 2, campaign_id: 3)

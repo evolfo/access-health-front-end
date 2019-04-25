@@ -15,12 +15,15 @@ class Browse extends Component {
   }
 
   render() {
-
+    console.log(this.props)
   	let allCampaigns;
   	if (this.props.campaigns.campaigns[0]) {
+
   	  allCampaigns = this.props.campaigns.campaigns.map(campaign => {
+        let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
+
   	  	return (
-  	  	  <Link to="#" key={campaign.id}>
+  	  	  <Link to={`/browse/${urlEnding}`} key={campaign.id}>
   	  	    <BrowseCard campaign={campaign} />
   	  	  </Link>
   	  	)
@@ -30,15 +33,15 @@ class Browse extends Component {
     return (
       <React.Fragment>
       	<Grid spacing={0} direction="column" alignItems="center" className="browse-campaigns" container spacing={24}>
-	  	  <Grid item xs={12}>
-	  	  	<section>
-	  	  	  <div className="filter-container">
-	  	  	  	<Filter />
-	  	  	  </div>
-	  	      {allCampaigns}
-	  	    </section>
-	  	  </Grid>
-	  	</Grid>
+  	  	  <Grid item xs={12}>
+  	  	  	<section>
+  	  	  	  <div className="filter-container">
+  	  	  	  	<Filter />
+  	  	  	  </div>
+  	  	      {allCampaigns}
+  	  	    </section>
+  	  	  </Grid>
+  	  	</Grid>
       </React.Fragment>
     )
   }

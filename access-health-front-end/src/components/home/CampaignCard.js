@@ -23,7 +23,7 @@ const CampaignCard = props => {
 	          {props.campaign.title}
 	        </Typography>
 		    <Typography component="p">
-	          {props.campaign.description}
+	          {props.campaign.description.slice(0, 100) + '...'}
 	        </Typography>
 	      </CardContent>
 	    </CardActionArea>

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_04_22_164239) do
     t.string "description"
     t.integer "goal"
     t.bigint "user_id"
+    t.datetime "campaign_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_campaigns_on_user_id"
