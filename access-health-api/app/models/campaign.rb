@@ -3,6 +3,7 @@ class Campaign < ApplicationRecord
 
   has_many :donations
   belongs_to :user
+  has_one_attached :photo
 
   def current_amount
    donations.map { |donation| donation.amount }.sum
@@ -18,5 +19,9 @@ class Campaign < ApplicationRecord
 
   def set_end
     self.campaign_end = (DateTime.now + 30).noon
+  end
+
+  def ends
+    self.campaign_end.to_formatted_s(:long_ordinal)
   end
 end

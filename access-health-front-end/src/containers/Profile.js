@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -24,6 +25,27 @@ class Profile extends Component {
   	})
   }
 
+  generateCampaigns = () => {
+    return this.props.currentUser.campaigns.map(campaign => {
+
+      let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
+
+      return (
+        <List>
+          <ListItem>
+            <Link to={`/browse/${urlEnding}`}>
+              <ListItemText
+                primary={`Campaign: ${campaign.title}`}
+                secondary={``}
+              />
+            </Link>
+            <p>Successful: {campaign.amount}</p>
+          </ListItem>
+        </List>
+      )
+    })
+  }
+
   render(){
   	console.log(this.props)
   	return(
@@ -34,6 +56,8 @@ class Profile extends Component {
   		  	    <Grid item xs={4}>
   		  	  	  <Typography variant="h4">Your Donations: </Typography>
   		  	  	  {this.generateDonations()}
+                <Typography variant="h4">Your Campaigns: </Typography>
+                {this.generateCampaigns()}
   		  	    </Grid>
 		  	    </Grid>
 		      </Grid>

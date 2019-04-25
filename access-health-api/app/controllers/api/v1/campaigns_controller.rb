@@ -1,11 +1,11 @@
-class Api::V1::CampaignsController < ApplicationController
+ class Api::V1::CampaignsController < ApplicationController
   before_action :find_campaign, only: [:show, :update]
 
   skip_before_action :authorized, only: [:create, :update, :index, :show]
 
   def index
   	@campaigns = Campaign.all
-  	render json: @campaigns
+  	render :index
   end
 
   def show
@@ -33,7 +33,7 @@ class Api::V1::CampaignsController < ApplicationController
   private
 
   def campaign_params
-  	params.require(:campaign).permit(:title, :description, :goal, :campaign_end)
+  	params.require(:campaign).permit(:title, :description, :goal, :campaign_end, :user_id)
   end
 
   def find_campaign

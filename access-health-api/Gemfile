@@ -23,6 +23,10 @@ gem 'active_model_serializers'
 
 gem 'faker'
 
+gem 'aws-sdk-s3'
+
+gem 'jbuilder'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

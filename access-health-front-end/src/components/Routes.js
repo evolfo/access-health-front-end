@@ -15,7 +15,7 @@ const Routes = props => {
       <Route exact path='/browse' component={Browse} />
       <Route path='/browse/:campaignTitle' component={CampaignPage} />
       
-      <Route path='/createcampaign' component={CreateCampaignContainer} />
+      <Route path='/create-campaign' component={CreateCampaignContainer} />
       <Route path='/profile/:username' render={() => (
       	<Profile currentUser={props.currentUser} />
   	  )}/>

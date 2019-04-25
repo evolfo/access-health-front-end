@@ -10,12 +10,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 class CampaignPage extends Component {
 
   render (){
+  	console.log(this.props.campaigns)
   	const currentTitle = this.props.match.params.campaignTitle.split('-').join(' ')
   
   	const campaign = this.props.campaigns.find(campaign => {
   	  return currentTitle === campaign.title.toLowerCase()
   	})
-  	console.log(campaign)
   	// const amountLeft = campaign.goal - campaign.current_amount
 
   	return(
@@ -27,14 +27,16 @@ class CampaignPage extends Component {
 	  	  	  	  <ProgressBar goal={campaign.goal} amount={campaign.current_amount} percentComplete={campaign.percent_complete} />
 	  	  	  	</Grid>
 	  	  	    <Grid item xs={8}>
-	  	  	      
+	  	  	      <Typography variant="h5">
+	  	  	  	    Campaign ends on {campaign.ends}
+	  	  	  	  </Typography>
 		  	      <Card className="campaign-page-card">
 				      <CardMedia
 				        component="img"
 				        alt={campaign.title}
 				        className=""
 				        height="140"
-				        image=""
+				        image={`http://localhost:3000${campaign.photoUrl}`}
 				        title={campaign.title}
 				      />
 				      <CardContent>

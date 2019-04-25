@@ -8,6 +8,9 @@ export default function campaignsReducer(state = initialState, action) {
     case 'GET_CAMPAIGNS':
  	  return {...state, campaigns: action.payload}
 
+ 	case 'CREATE_CAMPAIGN': 
+ 	  console.log('hi')
+
     default:
       return state;
   }

@@ -13,7 +13,7 @@ const HomeBackground = props => {
 	  	  	<Typography variant="h6">
 	  	  	  Are you in debt because of medical bills?
 	  	  	</Typography>
-	  	  	<Link to='/browse'>
+	  	  	<Link to='/create-campaign'>
 	 	 	  <Button variant="outlined" className="">
 	    		Create a Campaign
 	  		  </Button>
