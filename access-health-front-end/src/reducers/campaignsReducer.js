@@ -10,6 +10,7 @@ export default function campaignsReducer(state = initialState, action) {
 
  	case 'CREATE_CAMPAIGN': 
  	  console.log('hi')
+ 	  return {...state, campaigns: [...state.campaigns, action.payload] }
 
     default:
       return state;

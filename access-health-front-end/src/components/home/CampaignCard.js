@@ -11,11 +11,11 @@ import ProgressBar from './ProgressBar'
 const CampaignCard = props => {
   return (
   	<Grid item xs={4}>
-      <Card>
-	    <CardActionArea>
+  	  <CardActionArea>
+      	<Card>   
 	      <CardMedia
 	        className="home-card"
-	        image="/img/placeholder1.jpg"
+	        image={`http://localhost:3000${props.campaign.photoUrl}`}
 	        title={props.campaign.title}
 	      />
 	      <CardContent>
@@ -26,9 +26,9 @@ const CampaignCard = props => {
 	          {props.campaign.description.slice(0, 100) + '...'}
 	        </Typography>
 	      </CardContent>
-	    </CardActionArea>
-	  <ProgressBar percentComplete={props.campaign.percent_complete} />
-	  </Card>
+	      <ProgressBar percentComplete={props.campaign.percent_complete} />
+	    </Card>
+	  </CardActionArea>
     </Grid>
   )
 }

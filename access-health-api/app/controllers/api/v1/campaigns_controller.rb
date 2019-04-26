@@ -33,7 +33,7 @@
   private
 
   def campaign_params
-  	params.require(:campaign).permit(:title, :description, :goal, :campaign_end, :user_id)
+  	params.require(:campaign).permit(:title, :description, :goal, :user_id, :photo)
   end
 
   def find_campaign

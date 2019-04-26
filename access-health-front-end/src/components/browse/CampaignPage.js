@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import ProgressBar from '../home/ProgressBar'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 
 class CampaignPage extends Component {
 
@@ -18,27 +17,27 @@ class CampaignPage extends Component {
   	})
   	// const amountLeft = campaign.goal - campaign.current_amount
 
+  	const imgBackgroundStyle = {
+  	  background: `url('http://localhost:3000${campaign.photoUrl}')`,
+  	  padding: '15rem',
+  	  backgroundSize: 'cover'
+  	}
+
   	return(
   	  <React.Fragment>
   	 	<div className="container">
   	 		<section id="campaign-page">
 	  	  	  <Grid container direction="row" justify="center" alignItems="center">
-	  	  	  	<Grid item xs={10}>
+	  	  	  	<Grid item xs={9}>
 	  	  	  	  <ProgressBar goal={campaign.goal} amount={campaign.current_amount} percentComplete={campaign.percent_complete} />
 	  	  	  	</Grid>
-	  	  	    <Grid item xs={8}>
+	  	  	    <Grid item xs={7}>
 	  	  	      <Typography variant="h5">
 	  	  	  	    Campaign ends on {campaign.ends}
 	  	  	  	  </Typography>
 		  	      <Card className="campaign-page-card">
-				      <CardMedia
-				        component="img"
-				        alt={campaign.title}
-				        className=""
-				        height="140"
-				        image={`http://localhost:3000${campaign.photoUrl}`}
-				        title={campaign.title}
-				      />
+				      <div style={imgBackgroundStyle}>
+				      </div>
 				      <CardContent>
 		    	        <Typography gutterBottom variant="h5" component="h2">
 			              {campaign.title}

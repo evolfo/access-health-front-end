@@ -16,7 +16,7 @@ const BrowseCard = props => {
 	    <CardActionArea>
 	      <CardMedia
 	        className="home-card"
-	        image="/img/placeholder3.jpg"
+	        image={`http://localhost:3000${props.campaign.photoUrl}`}
 	        title={props.campaign.title}
 	      />
 	      <CardContent>

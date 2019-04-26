@@ -31,11 +31,10 @@ export const creatingCampaign = (formData) => {
   return dispatch => {
   	return fetch('http://localhost:3000/api/v1/campaigns', {
   	  method: 'POST',
-  	  headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
       },
-      body: JSON.stringify({ campaign: formData })
+      body: formData
   	})
   	  .then(resp => resp.json())
   	  .then(campaign => {

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import { DropzoneArea } from 'material-ui-dropzone'
 
 import { creatingCampaign } from '../actions/campaignActions';
 
@@ -15,7 +16,8 @@ class CreateCampaignContainer extends Component {
   	title: '',
   	description: '',
   	goal: 0,
-  	user_id: this.props.users.user.id
+  	user_id: this.props.users.user.id,
+  	photo: null
   }
 
   handleChange = (e) => {
@@ -26,12 +28,28 @@ class CreateCampaignContainer extends Component {
 
   handleSubmit = (e) => {
   	e.preventDefault()
+
+  	const formData = new FormData()
+  	formData.append('campaign[title]', this.state.title)
+  	formData.append('campaign[description]', this.state.description)
+  	formData.append('campaign[goal]', this.state.goal)
+  	formData.append('campaign[user_id]', parseInt(this.state.user_id))
+  	formData.append('campaign[photo]', this.state.photo)
+
+  	this.props.creatingCampaign(formData)
+
   	this.setState({
   	  title: '',
   	  description: '',
-  	  goal: 0
+  	  goal: 0,
+  	  photo: null
   	})
-  	this.props.creatingCampaign(this.state)
+  }
+
+  handleUpload = (e) => {
+  	this.setState({
+  	  photo: e[0]
+  	})
   }
 
   render(){
@@ -78,7 +96,9 @@ class CreateCampaignContainer extends Component {
 			          variant="filled"
 			          onChange={this.handleChange}
 			        />
+			        
 			      </form>
+			      <DropzoneArea onChange={this.handleUpload} />
 			      <Button onClick={this.handleSubmit} variant="outlined" color="primary" className="">
 			        Submit
 			      </Button>

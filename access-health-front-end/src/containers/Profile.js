@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -67,4 +68,8 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+const mapStateToProps = state => {
+  return state
+}
+
+export default connect(mapStateToProps)(Profile)
