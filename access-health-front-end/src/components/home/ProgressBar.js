@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react' 
 import Filler from './Filler'
 import Typography from '@material-ui/core/Typography';
 

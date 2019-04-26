@@ -4,8 +4,4 @@ class CampaignSerializer < ActiveModel::Serializer
   has_many :donations
   belongs_to :user
 
-  def owner
-  	object.user.first_name + ' ' + object.user.last_name
-  end
-
 end

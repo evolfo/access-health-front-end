@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from "react-router";
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -53,60 +54,71 @@ class CreateCampaignContainer extends Component {
   }
 
   render(){
-  	return(
-  	  <div className="container"> 
-  	  	<section id="create-campaign">
-	  	  	<Grid container direction="row" justify="center" alignItems="center">
-		  	  <Grid item xs={10}>
-		  	  	<Typography variant="h4" gutterBottom>Create a new Access Health Campaign</Typography>
-	  	  		  <form className="create-campaign-form" noValidate autoComplete="off">
-			        <TextField
-			          required
-			          id="title"
-			          label="title"
-			          className=""
-			          value={this.state.title}
-			          margin="normal"
-			          variant="filled"
-			          onChange={this.handleChange}
-			        />
 
-			        <TextField
-			          required
-			          id="description"
-			          label="description"
-			          className=""
-			          value={this.state.description}
-			          margin="normal"
-			          variant="filled"
-			          multiline={true}
-			          rows={4}
-			          rowsMax={20}
-			          onChange={this.handleChange}
-			        />
+  	// If statement allows users to see this page only if they are logged in
 
-			        <TextField
-			          required
-			          id="goal"
-			          label="goal"
-			          className=""
-			          type="number"
-			          value={this.state.goal}
-			          margin="normal"
-			          variant="filled"
-			          onChange={this.handleChange}
-			        />
-			        
-			      </form>
-			      <DropzoneArea onChange={this.handleUpload} />
-			      <Button onClick={this.handleSubmit} variant="outlined" color="primary" className="">
-			        Submit
-			      </Button>
-	  	  	  </Grid>
-	  	  	</Grid>
-	  	</section>
-  	  </div>
-  	)
+  	if (localStorage.token) {
+	  	return(
+	  	  <div className="container"> 
+	  	  	<section id="create-campaign">
+		  	  	<Grid container direction="row" justify="center" alignItems="center">
+			  	  <Grid item xs={10}>
+			  	  	<Typography variant="h4" gutterBottom>Create a new Access Health Campaign</Typography>
+		  	  		  <form className="create-campaign-form" noValidate autoComplete="off">
+				        <TextField
+				          required
+				          id="title"
+				          label="title"
+				          className=""
+				          value={this.state.title}
+				          margin="normal"
+				          variant="filled"
+				          onChange={this.handleChange}
+				        />
+
+				        <TextField
+				          required
+				          id="description"
+				          label="description"
+				          className=""
+				          value={this.state.description}
+				          margin="normal"
+				          variant="filled"
+				          multiline={true}
+				          rows={4}
+				          rowsMax={20}
+				          onChange={this.handleChange}
+				        />
+
+				        <TextField
+				          required
+				          id="goal"
+				          label="goal"
+				          className=""
+				          type="number"
+				          value={this.state.goal}
+				          margin="normal"
+				          variant="filled"
+				          onChange={this.handleChange}
+				        />
+				        
+				      </form>
+				      <DropzoneArea onChange={this.handleUpload} />
+				      <Button onClick={this.handleSubmit} variant="outlined" color="primary" className="">
+				        Submit
+				      </Button>
+		  	  	  </Grid>
+		  	  	</Grid>
+		  	</section>
+	  	  </div>
+	  	) 
+  	} else {
+  		this.props.history.push('/')
+  		return(
+  		  <div></div>
+  		)
+  		
+  	}
   }
 }
 
@@ -114,4 +126,4 @@ const mapStateToProps = state => {
 	return state
 }
 
-export default connect(mapStateToProps, { creatingCampaign })(CreateCampaignContainer)
+export default withRouter(connect(mapStateToProps, { creatingCampaign })(CreateCampaignContainer))

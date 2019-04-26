@@ -5,6 +5,10 @@ class Campaign < ApplicationRecord
   belongs_to :user
   has_one_attached :photo
 
+  def owner
+    self.user.first_name + ' ' + self.user.last_name
+  end
+
   def current_amount
    donations.map { |donation| donation.amount }.sum
   end

@@ -6,8 +6,6 @@ import CampaignCard from './CampaignCard'
 
 const HomeSupportCampaign = props => {
 
-  console.log(props.campaigns.campaigns)
-
   let homeCampaigns = []
   let homeCampaignsGenerator
 
@@ -16,7 +14,6 @@ const HomeSupportCampaign = props => {
   }
 
   if ((homeCampaigns[0] && homeCampaigns[1])) {
-  	  
 
 	  homeCampaignsGenerator = homeCampaigns.map(campaign => {
 	  	let urlEnding = campaign.title.split(' ').join('-').toLowerCase()

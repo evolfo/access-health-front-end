@@ -23,6 +23,8 @@ class CampaignPage extends Component {
   	  backgroundSize: 'cover'
   	}
 
+  	console.log(campaign)
+
   	return(
   	  <React.Fragment>
   	 	<div className="container">

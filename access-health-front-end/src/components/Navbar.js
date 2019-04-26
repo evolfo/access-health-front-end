@@ -13,29 +13,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import IconButton from '@material-ui/core/IconButton';
 
 import { logOut } from '../actions/userActions'
+import { loginModalOpen, loginModalClose, signupModalOpen, signupModalClose } from '../actions/navbarActions'
 
 class Navbar extends Component {
-
-  state = {
-    loginOpen: false,
-    signupOpen: false,
-  };
-
-  handleLoginClickOpen = () => {
-    this.setState({ loginOpen: true });
-  };
-
-  handleLoginClose = () => {
-    this.setState({ loginOpen: false });
-  };
-
-  handleSignupClickOpen = () => {
-    this.setState({ signupOpen: true });
-  };
-
-  handleSignupClose = () => {
-    this.setState({ signupOpen: false });
-  };
 
   handleLogOut = () => {
     this.props.history.push('/')
@@ -44,6 +24,7 @@ class Navbar extends Component {
   }
  
   render() {
+    
     let username = ''
     
     if (localStorage.token !== "undefined") { 
@@ -66,10 +47,10 @@ class Navbar extends Component {
             <div className="login-signup">
               { !localStorage.token || localStorage.token === "undefined" ? 
               <React.Fragment>
-                <Button onClick={this.handleLoginClickOpen} color="inherit">Login</Button>
-                <LoginModal open={this.state.loginOpen} handleClickOpen={this.handleLoginClickOpen} handleClose={this.handleLoginClose} />
-                <Button onClick={this.handleSignupClickOpen} color="inherit">Sign Up</Button>
-                <SignupModal open={this.state.signupOpen} handleClickOpen={this.handleSignupClickOpen} handleClose={this.handleSignupClose} /> 
+                <Button onClick={this.props.loginModalOpen} color="inherit">Login</Button>
+                <LoginModal open={this.props.navbar.loginOpen} handleClickOpen={this.props.loginModalOpen} handleClose={this.props.loginModalClose} />
+                <Button onClick={this.props.signupModalOpen} color="inherit">Sign Up</Button>
+                <SignupModal open={this.props.navbar.signupOpen} handleClickOpen={this.props.signupModalOpen} handleClose={this.props.signupModalClose} /> 
               </React.Fragment>
               :
               <React.Fragment>
@@ -93,4 +74,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default withRouter(connect(mapStateToProps, { logOut })(Navbar))
+export default withRouter(connect(mapStateToProps, { logOut, loginModalOpen, loginModalClose, signupModalOpen, signupModalClose })(Navbar))
