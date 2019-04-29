@@ -25,3 +25,14 @@
     margin-top: 2rem;
   }
 }
+
+.campaign-page-card {
+  h6 {
+    white-space: pre-line;
+    word-break: break-all;
+  }
+}
+
+.campaign-page-card > div {
+  background-size: cover !important;
+}

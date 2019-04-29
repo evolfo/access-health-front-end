@@ -1,5 +1,8 @@
 const initialState = {
-  user: { donations: []}
+  user: { donations: [] },
+  stripeAct: null,
+  stripeBalance: [],
+  stripeBalanceHistory: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -45,6 +48,25 @@ const usersReducer = (state = initialState, action) => {
 
     case "LOG_IN_ERROR":
       return Object.assign({}, state, { error: action.payload });
+
+    case "GET_STRIPE_ACT":
+
+      return {
+        ...state,
+        stripeAct: action.payload
+      }
+
+    case "GET_STRIPE_BALANCE":
+      return {
+        ...state,
+        stripeBalance: action.payload
+      }
+
+    case "GET_STRIPE_BALANCE_HISTORY":
+      return {
+        ...state,
+        stripeBalanceHistory: action.payload
+      }
  
     default:
       return state;

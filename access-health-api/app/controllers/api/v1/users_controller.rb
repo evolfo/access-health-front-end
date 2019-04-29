@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   before_action :find_user, only: [:show]
 
-  skip_before_action :authorized, only: [:index, :create]
+  skip_before_action :authorized, only: [:index, :create, :stripe_callback]
 
   def profile
     render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -24,6 +24,27 @@ class Api::V1::UsersController < ApplicationController
   	else
   	  render json: { errors: @user.errors.full_messages }, status: :unprocessible_entity
   	end
+  end
+
+  def stripe_callback
+    stripe_test_client_id = Rails.application.credentials.stripe[:client_id]
+    stripe_test_secret_key = Rails.application.credentials.stripe[:secret_key]
+
+    options = {
+      site: 'https://connect.stripe.com',
+      authorize_url: '/oauth/authorize',
+      token_url: '/oauth/token'
+    }
+
+    code = params[:code]
+    id = params[:state]
+    client = OAuth2::Client.new(stripe_test_client_id, stripe_test_secret_key, options)
+    @response = client.auth_code.get_token(code, :params => {:scope => 'read_write'})
+    @access_token = @response.token
+    @user = User.find(id)
+    @user.update!(stripe_uid: @response.params["stripe_user_id"]) if @response
+    
+    redirect_to "http://localhost:3001/"
   end
 
   private

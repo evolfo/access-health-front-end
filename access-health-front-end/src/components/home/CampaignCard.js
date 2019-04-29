@@ -5,7 +5,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom'
 import ProgressBar from './ProgressBar'
 
 const CampaignCard = props => {
@@ -22,7 +21,7 @@ const CampaignCard = props => {
 	        <Typography gutterBottom variant="h6" component="h2">
 	          {props.campaign.title}
 	        </Typography>
-		    <Typography component="p">
+		    <Typography variant="body1">
 	          {props.campaign.description.slice(0, 100) + '...'}
 	        </Typography>
 	      </CardContent>

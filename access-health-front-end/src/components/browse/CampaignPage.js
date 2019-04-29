@@ -10,91 +10,142 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DialogContent from '@material-ui/core/DialogContent';
 
+import { editingCampaign } from '../../actions/campaignActions'
+import Donate from './Donate'
+
 class CampaignPage extends Component {
 
   state = {
   	title: '',
   	description: '',
-  	editTitleDisplayed: false,
-  	editDescriptionDisplayed: false
+  	editDisplayed: false,
+  	campaign: {}
   }
 
-  handleEditTitleClick = () => {
-  	return (
-  	  <form>
-		  <DialogContent>
-		    <TextField
-		      required
-		      autoFocus
-		      margin="dense"
-		      label="Email Address"
-		      type="email"
-		      fullWidth
-		      value={this.state.email}
-		      onChange={this.handleChange}
-		    />
-	  	  </DialogContent>
-	  </form>
-  	)
+  componentDidMount(){
+
+  	const currentTitle = this.props.match.params.campaignTitle.split('-').join(' ')
+  	const campaign = this.props.campaigns.campaigns.find(campaign => {
+  	  return currentTitle === campaign.title.toLowerCase()
+  	})
+
+  	console.log(this.props.campaigns.campaigns, currentTitle)
+
+  	this.setState({
+  	  campaign: campaign,
+  	  title: campaign.title,
+  	  description: campaign.description
+  	})
   }
 
-  handleEditDescriptionClick = () => {
+  handleEditClick = () => {
+  	this.setState({  		
+  	  editDisplayed: !this.state.editDisplayed
+  	})
+  }
 
+
+  handleChange = (e) => {
+  	this.setState({
+  	  [e.target.id]: e.target.value})
+  }
+
+  handleSubmit = (e) => {
+  	e.preventDefault()
+  	this.setState({
+  	  editDisplayed: false
+  	})
+  	this.props.editingCampaign(this.state.title, this.state.description, this.state.campaign.id)
   }
 
   render (){
-  	const currentTitle = this.props.match.params.campaignTitle.split('-').join(' ')
+  	// this.state.campaign.id
   
   	const user = this.props.users.user
 
-  	const campaign = this.props.campaigns.campaigns.find(campaign => {
-  	  return currentTitle === campaign.title.toLowerCase()
-  	}, () => this.setState({ title: campaign.title, description: campaign.description}))
-
-  	console.log(user.id)
-  	console.log(campaign.user_id)
-  	// const amountLeft = campaign.goal - campaign.current_amount
-
   	const imgBackgroundStyle = {
-  	  background: `url('http://localhost:3000${campaign.photoUrl}')`,
-  	  padding: '15rem',
-  	  backgroundSize: 'cover'
+  	  background: `url('http://localhost:3000${this.state.campaign.photoUrl}')`,
+  	  padding: '15rem'
   	}
 
-  	console.log(this.state)
-
-  	if (user.id !== campaign.user_id) {
+  	if (user.id === this.state.campaign.user_id) {
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
-		  	  	  	<Grid item xs={9}>
-		  	  	  	  <ProgressBar goal={campaign.goal} amount={campaign.current_amount} percentComplete={campaign.percent_complete} />
+		  	  	  	<Grid item xs={10}>
+		  	  	  	  <ProgressBar goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
 		  	  	  	</Grid>
-		  	  	    <Grid item xs={7}>
+		  	  	    <Grid item xs={8}>
 		  	  	      <Typography variant="h5">
-		  	  	  	    Campaign ends on {campaign.ends}
+		  	  	  	    Campaign ends on {this.state.campaign.ends}
 		  	  	  	  </Typography>
 			  	      <Card className="campaign-page-card">
 					      <div style={imgBackgroundStyle}>
 					      </div>
 					      <CardContent>
-			    	        <Typography gutterBottom variant="h5" component="h2">
-				              {campaign.title}
-				              <Button onClick={this.handleEditTitleClick}>
+			    	        <Typography gutterBottom variant="h4" component="h2">
+				              {this.state.title}
+				              {this.state.editDisplayed
+				               ? 
+					              <form>
+									  <DialogContent>
+									    <TextField
+									      required
+									      id="title"
+									      autoFocus
+									      margin="dense"
+									      label="Title"
+									      type="text"
+									      fullWidth
+									      variant="filled"
+									      value={this.state.title}
+									      onChange={this.handleChange}
+									    />
+									    <Button color="primary" onClick={this.handleSubmit}>Submit</Button>
+								  	  </DialogContent>
+
+								  </form> :
+								  null
+							  }
+				              {!this.state.editDisplayed ? 
+				              <Button onClick={this.handleEditClick}>
 				              	<CreateIcon />
 				              </Button>
+				              : null}
 					        </Typography>
-					        <Typography component="p">
-					          {campaign.description}
-					          <Button onClick={this.handleEditDescriptionClick}> 
-					          	<CreateIcon />
-					          </Button>
+					        <Typography variant="body1">
+					          {this.state.description}
+					          {this.state.editDisplayed
+				               ? 
+					              <form>
+									  <DialogContent>
+									    <TextField
+									      required
+									      id="description"
+									      autoFocus
+									      margin="dense"
+									      label="Description"
+									      type="text"
+									      fullWidth
+									      variant="filled"
+									      multiline={true}
+				          				  rows={4}
+				          				  rowsMax={20}
+									      value={this.state.description}
+									      onChange={this.handleChange}
+									    />
+									    <Button color="primary" onClick={this.handleSubmit}>Submit</Button>
+								  	  </DialogContent>
+
+								  </form> :
+								  null
+							  }
 					        </Typography>
 
 					        <Typography variant="overline" gutterBottom>
-						      Campaign by {campaign.owner}
+						      Campaign by {this.state.campaign.owner}
 					        </Typography>
 					      </CardContent>
 					  </Card>
@@ -110,25 +161,26 @@ class CampaignPage extends Component {
 	  	 	<div className="container">
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
-		  	  	  	<Grid item xs={9}>
-		  	  	  	  <ProgressBar goal={campaign.goal} amount={campaign.current_amount} percentComplete={campaign.percent_complete} />
+		  	  	  	<Grid item xs={10}>
+		  	  	  	  <ProgressBar goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
 		  	  	  	</Grid>
-		  	  	    <Grid item xs={7}>
+		  	  	    <Grid item xs={8}>
 		  	  	      <Typography variant="h5">
-		  	  	  	    Campaign ends on {campaign.ends}
+		  	  	  	    Campaign ends on {this.state.campaign.ends}
 		  	  	  	  </Typography>
+		  	  	  	  <Donate />
 			  	      <Card className="campaign-page-card">
 					      <div style={imgBackgroundStyle}>
 					      </div>
 					      <CardContent>
-			    	        <Typography gutterBottom variant="h5" component="h2">
-				              {campaign.title}
+			    	        <Typography gutterBottom variant="h4" component="h2">
+				              {this.state.campaign.title}
 					        </Typography>
-					        <Typography component="p">
-					          {campaign.description}
+					        <Typography variant="body1" gutterBottom>
+					          {this.state.campaign.description}
 					        </Typography>
 					        <Typography variant="overline" gutterBottom>
-						      Campaign by {campaign.owner}
+						      Campaign by {this.state.campaign.owner}
 					        </Typography>
 					      </CardContent>
 					  </Card>
@@ -146,4 +198,5 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps)(CampaignPage)
+export default connect(mapStateToProps, { editingCampaign })(CampaignPage)
+

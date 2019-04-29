@@ -27,6 +27,22 @@ const getUsers = usersObj => {
   return { type: 'GET_USERS', payload: usersObj }
 }
 
+const getStripeAccount = stripeObj => {
+  return { type: 'GET_STRIPE_ACT', payload: stripeObj }
+}
+
+const getStripeBalance = stripeObj => {
+  return { type: 'GET_STRIPE_BALANCE', payload: stripeObj}
+}
+
+const getStripeBalanceHistory = stripeObj => {
+  return { type: 'GET_STRIPE_BALANCE_HISTORY', payload: stripeObj}
+}
+
+const donateToCampaign = stripeObj => {
+  return { type: 'DONATE_TO_CAMPAIGN', payload: stripeObj }
+}
+
 // THUNK
 
 
@@ -84,5 +100,72 @@ export const getAllUsers = () => {
       .then(usersJson => {
         dispatch(getUsers(usersJson))
       })
+  }
+}
+
+//getting stripe user
+export const getStripeAct = (stripeUid) => {
+  return dispatch => {
+    return fetch('https://api.stripe.com/v1/account', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Stripe-Account": stripeUid
+      }
+    })
+      .then(resp => resp.json())
+      .then(stripeObj => {
+        dispatch(getStripeAccount(stripeObj))
+      })
+  }
+}
+
+//getting stripe balance
+export const gettingStripeBalance = (stripeUid) => {
+  return dispatch => {
+    return fetch('https://api.stripe.com/v1/balance', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Stripe-Account": stripeUid
+      }
+    })
+      .then(resp => resp.json())
+      .then(balanceData => {
+        dispatch(getStripeBalance(balanceData))
+      })
+  }
+}
+
+export const gettingStripeBalanceHistory = (stripeUid) => {
+  return dispatch => {
+    return fetch('https://api.stripe.com/v1/balance/history', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Stripe-Account": stripeUid
+      }
+    })
+      .then(resp => resp.json())
+      .then(balanceData => {
+        dispatch(getStripeBalanceHistory(balanceData))
+      })
+  }
+}
+
+export const donatingToCampaign = () => {
+  debugger
+  return dispatch => {
+    return fetch('http://localhost:3000/api/v1/charge', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({ })
+    })
   }
 }

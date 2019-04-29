@@ -17,7 +17,7 @@ const Routes = props => {
       
       <Route path='/create-campaign' component={CreateCampaignContainer} />
       <Route path='/profile/:username' render={() => (
-      	<Profile currentUser={props.currentUser} />
+      	<Profile />
   	  )}/>
     </Switch>
   )
