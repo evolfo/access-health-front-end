@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DialogContent from '@material-ui/core/DialogContent';
 
+import { StripeProvider, Elements } from 'react-stripe-elements';
+
 import { editingCampaign } from '../../actions/campaignActions'
 import Donate from './Donate'
 
@@ -28,8 +30,6 @@ class CampaignPage extends Component {
   	const campaign = this.props.campaigns.campaigns.find(campaign => {
   	  return currentTitle === campaign.title.toLowerCase()
   	})
-
-  	console.log(this.props.campaigns.campaigns, currentTitle)
 
   	this.setState({
   	  campaign: campaign,
@@ -168,7 +168,11 @@ class CampaignPage extends Component {
 		  	  	      <Typography variant="h5">
 		  	  	  	    Campaign ends on {this.state.campaign.ends}
 		  	  	  	  </Typography>
-		  	  	  	  <Donate />
+		  	  	  	  <StripeProvider apiKey="pk_test_nxHkl553mJngNLPoDgeYG9aP00oaY8CYJm">
+			  	  	  	  <Elements> 
+			  	  	  	  	<Donate campaign={this.state.campaign}/>
+			  	  	  	  </Elements>
+			  	  	  </StripeProvider>
 			  	      <Card className="campaign-page-card">
 					      <div style={imgBackgroundStyle}>
 					      </div>

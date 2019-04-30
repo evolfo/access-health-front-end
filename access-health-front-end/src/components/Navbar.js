@@ -13,7 +13,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import IconButton from '@material-ui/core/IconButton';
 
 import { logOut } from '../actions/userActions'
-import { loginModalOpen, loginModalClose, signupModalOpen, signupModalClose } from '../actions/navbarActions'
+import { loginModalOpen, loginModalClose, signupModalOpen, signupModalClose } from '../actions/modalActions'
 
 class Navbar extends Component {
 
@@ -24,6 +24,7 @@ class Navbar extends Component {
   }
  
   render() {
+    console.log(this.props)
     
     let username = ''
     
@@ -48,9 +49,9 @@ class Navbar extends Component {
               { !localStorage.token || localStorage.token === "undefined" ? 
               <React.Fragment>
                 <Button onClick={this.props.loginModalOpen} color="inherit">Login</Button>
-                <LoginModal open={this.props.navbar.loginOpen} handleClickOpen={this.props.loginModalOpen} handleClose={this.props.loginModalClose} />
+                <LoginModal open={this.props.modal.loginOpen} handleClickOpen={this.props.loginModalOpen} handleClose={this.props.loginModalClose} />
                 <Button onClick={this.props.signupModalOpen} color="inherit">Sign Up</Button>
-                <SignupModal open={this.props.navbar.signupOpen} handleClickOpen={this.props.signupModalOpen} handleClose={this.props.signupModalClose} /> 
+                <SignupModal open={this.props.modal.signupOpen} handleClickOpen={this.props.signupModalOpen} handleClose={this.props.signupModalClose} /> 
               </React.Fragment>
               :
               <React.Fragment>

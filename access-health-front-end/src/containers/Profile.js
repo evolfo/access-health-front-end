@@ -78,96 +78,133 @@ class Profile extends Component {
   render(){
     console.log(this.props.users)
     const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.users.user.id}`
+    
+    if (this.props.users.user.stripe_uid && !this.props.users.stripeAct.error) {
+    	return(
+    		<div className="container">
 
-  	return(
-  		<div className="container">
+  	  	  <section id="profile">
+  	        <Grid container justify="center" spacing={24} >
+  		  	    <Grid id="no-padding" item xs={10}>
+    		  	    <Grid className="profile-cards" item xs={8}>
+                  <Typography variant="h4" gutterBottom>Hello, {this.props.users.user.first_name}</Typography>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography className="">Stripe Payment Profile</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <div className="accordian-content">
+                        <Paper className="accordian-table">
+                          <Table className="">
+                            <TableHead>
+                              <TableRow>
+                                <TableCell><Typography variant="h5"><Person />Connected Account</Typography></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell align=""><Email />{this.props.users.stripeAct.email}</TableCell>
+                                <TableCell align=""><Phone />{this.props.users.stripeAct.business_profile.support_phone}</TableCell>
+                                <TableCell align=""></TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </Paper>
+                        <Paper className="accordian-table">
+                          <Table className="">
+                            <TableHead>
+                              <TableRow>
+                                <TableCell><Typography variant="h5"><Money />Balance</Typography></TableCell>
+                                <TableCell></TableCell>
+                               
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              <TableRow>
+                                {this.props.users.stripeBalance.available.map(balance => {
+                                  let price = parseFloat(balance.amount)/100
+                                  let fixedPrice = price.toFixed(2)
+                                  return <TableCell align="">Available Funds: ${fixedPrice}</TableCell>
+                                })}
 
-	  	  <section id="profile">
-	        <Grid container justify="center" spacing={24} >
-		  	    <Grid id="no-padding" item xs={10}>
-  		  	    <Grid className="profile-cards" item xs={8}>
-                <Typography variant="h4" gutterBottom>Hello, {this.props.users.user.first_name}</Typography>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className="">Stripe Payment Profile</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div className="accordian-content">
-                      <Paper className="accordian-table">
-                        <Table className="">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell><Typography variant="h5"><Person />Connected Account</Typography></TableCell>
-                              <TableCell></TableCell>
-                              <TableCell></TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            <TableRow>
-                              <TableCell align=""><Email />{this.props.users.stripeAct.email}</TableCell>
-                              <TableCell align=""><Phone />{this.props.users.stripeAct.business_profile.support_phone}</TableCell>
-                              <TableCell align=""></TableCell>
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </Paper>
-                      <Paper className="accordian-table">
-                        <Table className="">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell><Typography variant="h5"><Money />Balance</Typography></TableCell>
-                              <TableCell></TableCell>
-                             
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            <TableRow>
-                              {this.props.users.stripeBalance.available.map(balance => {
-                                let price = parseFloat(balance.amount)/100
-                                let fixedPrice = price.toFixed(2)
-                                return <TableCell align="">Available Funds: ${fixedPrice}</TableCell>
-                              })}
-
-                              {this.props.users.stripeBalance.pending.map(balance => {
-                                let price = parseFloat(balance.amount)/100
-                                let fixedPrice = price.toFixed(2)
-                                return <TableCell align="">Pending Funds: ${fixedPrice}</TableCell>
-                              })}
-                              
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </Paper>
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className="">Your Donations</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div className="accordian-content">
-                      {this.generateDonations()}
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className="">Your Campaigns</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div className="accordian-campaign-content">
-                      {this.generateCampaigns()}
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <a href={stripeURL}>Set up Payments with Stripe</a>
+                                {this.props.users.stripeBalance.pending.map(balance => {
+                                  let price = parseFloat(balance.amount)/100
+                                  let fixedPrice = price.toFixed(2)
+                                  return <TableCell align="">Pending Funds: ${fixedPrice}</TableCell>
+                                })}
+                                
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </Paper>
+                      </div>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography className="">Your Donations</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <div className="accordian-content">
+                        {this.generateDonations()}
+                      </div>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography className="">Your Campaigns</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <div className="accordian-campaign-content">
+                        {this.generateCampaigns()}
+                      </div>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                  {/*<a href={stripeURL}>Set up Payments with Stripe</a>*/}
+    		  	    </Grid>
   		  	    </Grid>
-		  	    </Grid>
-		      </Grid>
-		    </section>
-		  </div>
-  	)
+  		      </Grid>
+  		    </section>
+  		  </div>
+    	)
+    } else {
+      return (
+        <div className="container">
+          <section id="profile">
+            <Grid container justify="center" spacing={24} >
+              <Grid id="no-padding" item xs={10}>
+                <Grid className="profile-cards" item xs={8}>
+                  <Typography variant="h4" gutterBottom>Hello, {this.props.users.user.first_name}</Typography>
+                    <ExpansionPanel>
+                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className="">Your Donations</Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <div className="accordian-content">
+                          {this.generateDonations()}
+                        </div>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                    <ExpansionPanel>
+                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className="">Your Campaigns</Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <div className="accordian-campaign-content">
+                          {this.generateCampaigns()}
+                        </div>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                    <a href={stripeURL}>Set up Payments with Stripe</a>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </section>
+          </div>
+        )
+    }
   }
 }
 

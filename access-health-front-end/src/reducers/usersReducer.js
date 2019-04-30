@@ -44,7 +44,15 @@ const usersReducer = (state = initialState, action) => {
       }
 
     case "GET_USERS":
-      return {...state, ...action.payload}
+      const currentUser = action.payload.find(user => {
+        return user.id === state.user.id
+      })
+      
+      return {
+        ...state,
+        ...action.payload,
+        user: currentUser
+      }
 
     case "LOG_IN_ERROR":
       return Object.assign({}, state, { error: action.payload });

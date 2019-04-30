@@ -15,3 +15,11 @@ export const signupModalOpen = () => {
 export const signupModalClose = () => {
   return { type: 'SIGNUP_MODAL_CLOSE' }
 }
+
+export const donationModalOpen = () => {
+  return { type: 'DONATION_MODAL_OPEN' }
+}
+
+export const donationModalClose = () => {
+  return { type: 'DONATION_MODAL_CLOSE' }
+}

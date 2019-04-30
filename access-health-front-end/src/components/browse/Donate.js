@@ -3,34 +3,60 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 
+import DonateModal from './DonateModal'
+
+import { donationModalOpen, donationModalClose } from '../../actions/modalActions'
+
+import { injectStripe } from 'react-stripe-elements';
+
 import { connect } from 'react-redux'
 
 class Donate extends Component {
 
-  state = {
-  	donationAmount: null,
-  	complete: false
+  constructor(props) {
+  	super(props)
+  	this.state = {
+  	  donationAmount: 0,
+  	  complete: false,
+  	  message: ''
+  	}
+  	this.handleClick = this.handleClick.bind(this)
   }
+
 
   handleChange = (e) => {
   	this.setState({
-  	  donationAmount: e.target.value
+  	  [e.target.id]: e.target.value,
   	})
   }
 
-  handleSubmit = (e) => {
+  async handleClick(e) {
   	e.preventDefault()
   	const amount = this.state.donationAmount * 100
+
+  	const {token} = await this.props.stripe.createToken({name: this.props.users.user.first_name});
+
+  	let response = await fetch('http://localhost:3000/api/v1/charge', {
+  	  method: 'POST',
+  	  headers: {
+  	  	'Content-Type': 'application/json',
+  	  	Authorization: `Bearer: ${localStorage.getItem('token')}`
+  	  },
+  	  body: JSON.stringify({
+  	  	amount: amount,
+  	  	stripeToken: token.id,
+  	  	ownerId: this.props.campaign.user_id
+  	  })
+  	})
 
   }
 
   render(){
-  	console.log(this.props)
 	return (
 		<React.Fragment>
-		  <div>
+		  <form>
 			<TextField
-			  id="filled-adornment-amount"
+			  id="donationAmount"
 			  className=""
 			  variant="filled"
 			  type="number"
@@ -41,9 +67,9 @@ class Donate extends Component {
 			    startAdornment: <InputAdornment position="start">$</InputAdornment>,
 			  }}
 			/>
-			
-		  </div>
-		  <Button variant="outlined" color="primary" onClick={this.handleSubmit}>Submit</Button>
+			<DonateModal handleChange={this.handleChange} handleClick={this.handleClick} amount={this.state.donationAmount} open={this.props.modal.donationOpen} handleClickOpen={this.props.donationModalOpen} handleClose={this.props.donationModalClose} />
+		  </form>
+		  <Button onClick={this.props.donationModalOpen} variant="outlined" color="primary">Submit</Button>
 		</React.Fragment>
 	  )
 
@@ -54,4 +80,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps)(Donate)
+export default connect(mapStateToProps, { donationModalOpen, donationModalClose })(injectStripe(Donate))
