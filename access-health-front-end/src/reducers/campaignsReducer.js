@@ -12,7 +12,6 @@ export default function campaignsReducer(state = initialState, action) {
  	  return {...state, campaigns: [...state.campaigns, action.payload] }
 
  	case 'EDIT_CAMPAIGN':
- 	  console.log(state)
  	  const index = state.campaigns.indexOf(
  	  	state.campaigns.find(campaign => campaign.id === action.payload.id))
 
@@ -20,6 +19,9 @@ export default function campaignsReducer(state = initialState, action) {
  	  	     campaigns: [...state.campaigns.slice(0, index),
   			 {...action.payload},
   			 ...state.campaigns.slice(index + 1)]} 
+
+  	case 'DELETE_CAMPAIGN':
+  	  return {...state, campaigns: state.campaigns.filter(campaign => campaign.id !== action.payload)}
 
     default:
       return state;

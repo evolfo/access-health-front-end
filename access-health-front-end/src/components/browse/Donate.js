@@ -7,6 +7,7 @@ import DonateModal from './DonateModal'
 
 import { donationModalOpen, donationModalClose } from '../../actions/modalActions'
 import { createADonation, getAllDonations } from '../../actions/donationActions'
+import { loadCampaigns } from '../../actions/campaignActions'
 
 import { injectStripe } from 'react-stripe-elements';
 
@@ -31,7 +32,7 @@ class Donate extends Component {
   	})
   }
 
-  async handleClick(e) {
+  handleClick = async (e) => {
   	e.preventDefault()
   	const amount = this.state.donationAmount * 100
 
@@ -61,6 +62,7 @@ class Donate extends Component {
   	  .then(chargeObj => {
   	  	this.props.createADonation(donationObj)
   	}).then(hello => {
+  		this.props.donationModalClose()
   		this.props.getAllDonations()
   	})
   }
@@ -94,4 +96,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { donationModalOpen, donationModalClose, createADonation, getAllDonations })(injectStripe(Donate))
+export default connect(mapStateToProps, { donationModalOpen, donationModalClose, createADonation, getAllDonations, loadCampaigns })(injectStripe(Donate))

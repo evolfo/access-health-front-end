@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux'
 
 const ProgressBar = props => {
+	console.log(props)
 
   const campaign = props.campaigns.campaigns.find(campaign => {
   	return campaign.id === props.campaignId

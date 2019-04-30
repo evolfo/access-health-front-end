@@ -38,6 +38,7 @@ class CreateCampaignContainer extends Component {
   	formData.append('campaign[photo]', this.state.photo)
 
   	this.props.creatingCampaign(formData)
+  	this.props.history.push('/')
 
   	this.setState({
   	  title: '',

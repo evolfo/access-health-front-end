@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :charges
 	  resources :users, only: [:index, :create]
 	  resources :donations, only: [:index, :create, :show]
-	  resources :campaigns, only: [:index, :create, :show, :update, :delete]
+	  resources :campaigns, only: [:index, :create, :show, :update, :destroy]
 	    post '/login', to: 'auth#create'
   	  get '/profile', to: 'users#profile'
   	  get "/oauth/callback", to:'users#stripe_callback'

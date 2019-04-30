@@ -12,6 +12,10 @@ const editCampaign = (campaignObj) => {
   return { type: 'EDIT_CAMPAIGN', payload: campaignObj }
 };
 
+const removeCampaign = (campaignId) => {
+  return { type: 'DELETE_CAMPAIGN', payload: campaignId }
+}
+
 // THUNK
 
 //loading all campaigns
@@ -62,6 +66,18 @@ export const creatingCampaign = (formData) => {
   }
 }
 
+//deleting a campaign
+export const deleteCampaign = (campaignId) => {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/v1/campaigns/' + campaignId, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+      }
+    })
+      .then(resp => dispatch(removeCampaign(campaignId)))
+  }
+}
 
 
 

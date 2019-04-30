@@ -1,5 +1,5 @@
  class Api::V1::CampaignsController < ApplicationController
-  before_action :find_campaign, only: [:show, :update]
+  before_action :find_campaign, only: [:show, :update, :destroy]
 
   skip_before_action :authorized, only: [:create, :update, :index, :show]
 
@@ -28,6 +28,10 @@
     else
       render json: { errors: @campaign.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @campaign.destroy
   end
 
   private

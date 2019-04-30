@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ProgressBar from '../home/ProgressBar'
@@ -12,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import { StripeProvider, Elements } from 'react-stripe-elements';
 
-import { editingCampaign } from '../../actions/campaignActions'
+import { editingCampaign, deleteCampaign } from '../../actions/campaignActions'
 import Donate from './Donate'
 
 class CampaignPage extends Component {
@@ -56,6 +57,11 @@ class CampaignPage extends Component {
   	  editDisplayed: false
   	})
   	this.props.editingCampaign(this.state.title, this.state.description, this.state.campaign.id)
+  }
+
+  handleDelete = () => {
+  	this.props.deleteCampaign(this.state.campaign.id)
+  	this.props.history.push('/')
   }
 
   render (){
@@ -103,7 +109,7 @@ class CampaignPage extends Component {
 									      value={this.state.title}
 									      onChange={this.handleChange}
 									    />
-									    <Button color="primary" onClick={this.handleSubmit}>Submit</Button>
+									    <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
 								  	  </DialogContent>
 
 								  </form> :
@@ -136,9 +142,9 @@ class CampaignPage extends Component {
 									      value={this.state.description}
 									      onChange={this.handleChange}
 									    />
-									    <Button color="primary" onClick={this.handleSubmit}>Submit</Button>
+									    <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
 								  	  </DialogContent>
-
+								  	  <Button variant="contained" color="secondary" onClick={this.handleDelete}>Delete Campaign</Button>
 								  </form> :
 								  null
 							  }
@@ -202,5 +208,5 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { editingCampaign })(CampaignPage)
+export default connect(mapStateToProps, { editingCampaign, deleteCampaign })(withRouter(CampaignPage))
 
