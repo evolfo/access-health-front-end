@@ -17,26 +17,6 @@ import { withRouter } from "react-router-dom";
 
 class DonateModal extends Component {
 
-	// handleChange = (e) => {
-	// 	this.setState({
-	// 	  [e.target.type]: e.target.value
-	// 	})
-	// }
-
-	// handleSubmit = (e) => {
-	// 	e.preventDefault()
-	// 	this.props.handleClose()
-	// 	this.props.getAuth(this.state)
-	// 	setTimeout(() => {
-	// 		if(localStorage.token && localStorage.token != "undefined") {
-	// 		  this.props.history.push('/')
-	// 		  window.alert('You are signed in!')
-	// 		} else {
-	// 		  window.alert('Please try again')
-	// 		}
-	// 	}, 200)
-	// }
-
 	render() {
 		return (
 		<Dialog
@@ -60,14 +40,14 @@ class DonateModal extends Component {
 			    />
 			    <TextField
 			      required
-			      id="donation-message"
+			      id="message"
 			      autoFocus
 			      margin="dense"
 			      label="Message to the Campaign Owner"
 			      type="text"
 			      fullWidth
 			      value={this.props.message}
-			      onChange={this.handleChange}
+			      onChange={this.props.handleChange}
 			    />
 
 			  </DialogContent>

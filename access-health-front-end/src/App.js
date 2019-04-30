@@ -8,11 +8,15 @@ import Footer from './components/Footer'
 import { BrowserRouter } from 'react-router-dom'
 
 import { getAllUsers } from './actions/userActions'
+import { getAllDonations } from './actions/donationActions'
+import { loadCampaigns } from './actions/campaignActions'
 
 class App extends Component {
 
   componentDidMount() {
     this.props.getAllUsers()
+    this.props.getAllDonations()
+    this.props.loadCampaigns()
   }
  
   render() {
@@ -32,4 +36,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { getAllUsers })(App);
+export default connect(mapStateToProps, { getAllUsers, getAllDonations, loadCampaigns })(App);

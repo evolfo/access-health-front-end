@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import DonateModal from './DonateModal'
 
 import { donationModalOpen, donationModalClose } from '../../actions/modalActions'
+import { createADonation, getAllDonations } from '../../actions/donationActions'
 
 import { injectStripe } from 'react-stripe-elements';
 
@@ -34,6 +35,13 @@ class Donate extends Component {
   	e.preventDefault()
   	const amount = this.state.donationAmount * 100
 
+  	const donationObj = {
+  		amount: this.state.donationAmount,
+  		user_id: this.props.users.user.id,
+  		campaign_id: this.props.campaign.id,
+  		message: this.state.message
+  	}
+
   	const {token} = await this.props.stripe.createToken({name: this.props.users.user.first_name});
 
   	let response = await fetch('http://localhost:3000/api/v1/charge', {
@@ -45,10 +53,16 @@ class Donate extends Component {
   	  body: JSON.stringify({
   	  	amount: amount,
   	  	stripeToken: token.id,
-  	  	ownerId: this.props.campaign.user_id
+  	  	ownerId: this.props.campaign.user_id,
+  	  	campaignId: this.props.campaign.id,
+  	  	message: this.state.message
   	  })
   	})
-
+  	  .then(chargeObj => {
+  	  	this.props.createADonation(donationObj)
+  	}).then(hello => {
+  		this.props.getAllDonations()
+  	})
   }
 
   render(){
@@ -80,4 +94,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { donationModalOpen, donationModalClose })(injectStripe(Donate))
+export default connect(mapStateToProps, { donationModalOpen, donationModalClose, createADonation, getAllDonations })(injectStripe(Donate))

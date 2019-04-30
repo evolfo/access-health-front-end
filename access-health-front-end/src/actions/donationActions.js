@@ -4,6 +4,10 @@ export const createDonation = donationObj => {
   return { type: "CREATE_DONATION", payload: donationObj }
 }
 
+const getDonations = donationsObj => {
+  return { type: 'GET_DONATIONS', payload: donationsObj }
+}
+
 // THUNK 
 
 export const createADonation = donation => {
@@ -19,7 +23,17 @@ export const createADonation = donation => {
    })
      .then(resp => resp.json())
      .then(donationObj => {
-       dipatch(createDonation(donationObj))
+       dispatch(createDonation(donationObj))
      })
  }
+}
+
+export const getAllDonations = () => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/donations')
+    .then(resp => resp.json())
+    .then(donationsObj => {
+      dispatch(getDonations(donationsObj))
+    })
+  }
 }

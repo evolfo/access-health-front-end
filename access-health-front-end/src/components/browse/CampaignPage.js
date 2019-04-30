@@ -75,7 +75,7 @@ class CampaignPage extends Component {
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
 		  	  	  	<Grid item xs={10}>
-		  	  	  	  <ProgressBar goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
+		  	  	  	  <ProgressBar campaignId={this.state.campaign.id} goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
 		  	  	  	</Grid>
 		  	  	    <Grid item xs={8}>
 		  	  	      <Typography variant="h5">
@@ -162,7 +162,7 @@ class CampaignPage extends Component {
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
 		  	  	  	<Grid item xs={10}>
-		  	  	  	  <ProgressBar goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
+		  	  	  	  <ProgressBar campaignId={this.state.campaign.id} goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
 		  	  	  	</Grid>
 		  	  	    <Grid item xs={8}>
 		  	  	      <Typography variant="h5">

@@ -1,6 +1,6 @@
 class Api::V1::ChargesController < ApplicationController
 
-    skip_before_action :authenticate, only: [:new]
+    # skip_before_action :authenticate, only: [:new, :create]
 
     Stripe.api_key = Rails.application.credentials.stripe[:secret_key]
 
@@ -10,8 +10,6 @@ class Api::V1::ChargesController < ApplicationController
 	def create
 	  @amount = params[:amount]
 
-	  @amount = @amount.gsub('$', '').gsub(',', '')
-
 	  begin
 	    @amount = Float(@amount).round(2)
 	  rescue
@@ -20,7 +18,9 @@ class Api::V1::ChargesController < ApplicationController
 	    return
 	  end
 
-	  @amount = (@amount * 100).to_i # Must be an integer!
+	  # Donation.create(user_id: params[:ownerId], campaign_id: params[:campaignId], message: params[:message], amount: @amount/100)
+
+	  @amount = (@amount).to_i # Must be an integer!
 
 	  if @amount < 500
 	    flash[:error] = 'Charge not completed. Donation amount must be at least $5.'
@@ -28,7 +28,7 @@ class Api::V1::ChargesController < ApplicationController
 	    return
 	  end
 
-	  byebug
+	  user = User.find(params[:ownerId])
 
 	  Stripe::Charge.create({
 	    amount: @amount,
@@ -36,7 +36,7 @@ class Api::V1::ChargesController < ApplicationController
 	    source: params[:stripeToken],
 	    description: 'Custom donation',
 	    transfer_data: {
-    	  destination: "{CONNECTED_STRIPE_ACCOUNT_ID}"
+    	  destination: user.stripe_uid,
   		}
 	  })
 
@@ -44,5 +44,5 @@ class Api::V1::ChargesController < ApplicationController
 	    flash[:error] = e.message
 	    redirect_to new_charge_path
 	  end
-	end
 end
+
