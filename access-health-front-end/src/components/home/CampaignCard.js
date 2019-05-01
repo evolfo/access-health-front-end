@@ -25,7 +25,7 @@ const CampaignCard = props => {
 	          {props.campaign.description.slice(0, 100) + '...'}
 	        </Typography>
 	      </CardContent>
-	      <ProgressBar percentComplete={props.campaign.percent_complete} />
+	      <ProgressBar unique={props.campaign.title} campaignId={props.campaign.id} />
 	    </Card>
 	  </CardActionArea>
     </Grid>

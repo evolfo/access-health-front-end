@@ -24,17 +24,13 @@ class Filter extends Component {
           <Select
             value={this.state.filterTerm}
             onChange={this.handleFilterChange}
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
           >
             <MenuItem value="All">
               <em>All Campaigns</em>
             </MenuItem>
             <MenuItem value="fewest-days">Fewest Days Left</MenuItem>
             <MenuItem value="newest">Newest</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value='lowest-cost-to-complete'>Lowest Cost to Complete</MenuItem>
           </Select>
         </FormControl>
       </form>

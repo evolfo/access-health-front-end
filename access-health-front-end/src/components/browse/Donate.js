@@ -20,7 +20,8 @@ class Donate extends Component {
   	this.state = {
   	  donationAmount: 0,
   	  complete: false,
-  	  message: ''
+  	  message: '',
+      loading: false
   	}
   	this.handleClick = this.handleClick.bind(this)
   }
@@ -34,6 +35,9 @@ class Donate extends Component {
 
   handleClick = async (e) => {
   	e.preventDefault()
+
+    this.setState({loading: true})
+
   	const amount = this.state.donationAmount * 100
 
   	const donationObj = {
@@ -60,34 +64,38 @@ class Donate extends Component {
   	  })
   	})
   	  .then(chargeObj => {
+        this.setState({
+          loading: false
+        })
   	  	this.props.createADonation(donationObj)
   	}).then(hello => {
   		this.props.donationModalClose()
   		this.props.getAllDonations()
+      this.props.loadCampaigns()
   	})
   }
 
   render(){
-	return (
-		<React.Fragment>
-		  <form>
-			<TextField
-			  id="donationAmount"
-			  className=""
-			  variant="filled"
-			  type="number"
-			  label="Donation Amount"
-			  value={this.state.donationAmount}
-			  onChange={this.handleChange}
-			  InputProps={{
-			    startAdornment: <InputAdornment position="start">$</InputAdornment>,
-			  }}
-			/>
-			<DonateModal handleChange={this.handleChange} handleClick={this.handleClick} amount={this.state.donationAmount} open={this.props.modal.donationOpen} handleClickOpen={this.props.donationModalOpen} handleClose={this.props.donationModalClose} />
-		  </form>
-		  <Button onClick={this.props.donationModalOpen} variant="outlined" color="primary">Submit</Button>
-		</React.Fragment>
-	  )
+    	return (
+    		<React.Fragment>
+    		  <form>
+    			<TextField
+    			  id="donationAmount"
+    			  className=""
+    			  variant="filled"
+    			  type="number"
+    			  label="Donation Amount"
+    			  value={this.state.donationAmount}
+    			  onChange={this.handleChange}
+    			  InputProps={{
+    			    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+    			  }}
+    			/>
+    			<DonateModal loading={this.state.loading} handleChange={this.handleChange} handleClick={this.handleClick} amount={this.state.donationAmount} open={this.props.modal.donationOpen} handleClickOpen={this.props.donationModalOpen} handleClose={this.props.donationModalClose} />
+    		  </form>
+    		  <Button onClick={this.props.donationModalOpen} variant="outlined" color="primary">Submit</Button>
+    		</React.Fragment>
+    	  )
 
 	}
 }

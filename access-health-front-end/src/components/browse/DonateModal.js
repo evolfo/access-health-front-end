@@ -12,6 +12,7 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import { connect } from 'react-redux';
 
 import { donationModalOpen, donationModalClose } from '../../actions/modalActions'
+import Loader from '../Loader'
 
 import { withRouter } from "react-router-dom";
 
@@ -53,6 +54,7 @@ class DonateModal extends Component {
 			  </DialogContent>
 			  <CardElement />
 			</form>
+			{this.props.loading ? <Loader /> : null}
 		  <DialogActions>
 		    <Button onClick={this.props.handleClose} color="primary">
 		      Cancel

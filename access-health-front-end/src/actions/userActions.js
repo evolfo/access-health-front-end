@@ -39,10 +39,6 @@ const getStripeBalanceHistory = stripeObj => {
   return { type: 'GET_STRIPE_BALANCE_HISTORY', payload: stripeObj}
 }
 
-// const donateToCampaign = stripeObj => {
-//   return { type: 'DONATE_TO_CAMPAIGN', payload: stripeObj }
-// }
-
 // THUNK
 
 
@@ -155,17 +151,3 @@ export const gettingStripeBalanceHistory = (stripeUid) => {
       })
   }
 }
-
-// export const donatingToCampaign = () => {
-//   debugger
-//   return dispatch => {
-//     return fetch('http://localhost:3000/api/v1/charge', {
-//       method: 'POST',
-//       headers: {
-//         Authorization: `Bearer ${localStorage.token}`,
-//         "Content-Type": 'application/json'
-//       },
-//       body: JSON.stringify({ })
-//     })
-//   }
-// }

@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import { StripeProvider, Elements } from 'react-stripe-elements';
 
-import { editingCampaign, deleteCampaign } from '../../actions/campaignActions'
+import { editingCampaign, deleteCampaign, loadCampaigns } from '../../actions/campaignActions'
 import Donate from './Donate'
 
 class CampaignPage extends Component {
@@ -26,17 +26,23 @@ class CampaignPage extends Component {
   }
 
   componentDidMount(){
-
   	const currentTitle = this.props.match.params.campaignTitle.split('-').join(' ')
   	const campaign = this.props.campaigns.campaigns.find(campaign => {
   	  return currentTitle === campaign.title.toLowerCase()
   	})
 
-  	this.setState({
-  	  campaign: campaign,
-  	  title: campaign.title,
-  	  description: campaign.description
-  	})
+  	console.log(this.props.campaigns)
+
+  	if (campaign) {
+  		let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
+
+	  	this.setState({
+	  	  campaign: campaign,
+	  	  title: campaign.title,
+	  	  description: campaign.description
+	  	})
+	  	this.props.history.push(`/browse/${urlEnding}`)
+	}
   }
 
   handleEditClick = () => {
@@ -68,7 +74,7 @@ class CampaignPage extends Component {
   	// this.state.campaign.id
   
   	const user = this.props.users.user
-
+  	console.log(this.state.campaign)
   	const imgBackgroundStyle = {
   	  background: `url('http://localhost:3000${this.state.campaign.photoUrl}')`,
   	  padding: '15rem'
@@ -208,5 +214,5 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { editingCampaign, deleteCampaign })(withRouter(CampaignPage))
+export default connect(mapStateToProps, { editingCampaign, deleteCampaign, loadCampaigns })(withRouter(CampaignPage))
 

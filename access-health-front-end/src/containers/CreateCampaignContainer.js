@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { DropzoneArea } from 'material-ui-dropzone'
 
-import { creatingCampaign } from '../actions/campaignActions';
+import { creatingCampaign, loadCampaigns } from '../actions/campaignActions';
 
 class CreateCampaignContainer extends Component {
 
@@ -30,6 +30,8 @@ class CreateCampaignContainer extends Component {
   handleSubmit = (e) => {
   	e.preventDefault()
 
+  	let urlEnding = this.state.title.split(' ').join('-').toLowerCase()
+
   	const formData = new FormData()
   	formData.append('campaign[title]', this.state.title)
   	formData.append('campaign[description]', this.state.description)
@@ -37,8 +39,11 @@ class CreateCampaignContainer extends Component {
   	formData.append('campaign[user_id]', parseInt(this.state.user_id))
   	formData.append('campaign[photo]', this.state.photo)
 
-  	this.props.creatingCampaign(formData)
-  	this.props.history.push('/')
+  	this.props.creatingCampaign(formData).then(() => {
+  		this.props.loadCampaigns().then(() => {this.props.history.push(`/browse/${urlEnding}`)})
+  	  }
+  	)
+  	
 
   	this.setState({
   	  title: '',
@@ -127,4 +132,4 @@ const mapStateToProps = state => {
 	return state
 }
 
-export default withRouter(connect(mapStateToProps, { creatingCampaign })(CreateCampaignContainer))
+export default withRouter(connect(mapStateToProps, { creatingCampaign, loadCampaigns })(CreateCampaignContainer))

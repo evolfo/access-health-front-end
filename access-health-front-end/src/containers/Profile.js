@@ -17,6 +17,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Fab from '@material-ui/core/Fab';
 
 import Person from '@material-ui/icons/PersonOutline';
 import Email from '@material-ui/icons/Email';
@@ -48,15 +49,20 @@ class Profile extends Component {
 
   generateDonations = () => {
   	return this.props.users.user.donations.map(donation => {
+
+      let urlEnding = donation.campaign_title.split(' ').join('-').toLowerCase()
+
   	  return (
   	  	<List>
-          <ListItem>
-            <ListItemText
-              primary={`Campaign: ${donation.campaign_title}`}
-              secondary={`by ${donation.campaign_owner}`}
-            />
-            <p>Amount: ${donation.amount}</p>
-          </ListItem>
+          <Link key={donation.id} to={`/browse/${urlEnding}`}>
+            <ListItem>
+              <ListItemText
+                primary={`Campaign: ${donation.campaign_title}`}
+                secondary={`by ${donation.campaign_owner}`}
+              />
+              <p>Amount: ${donation.amount}</p>
+            </ListItem>
+          </Link>
       	</List>
       )
   	})
@@ -76,7 +82,7 @@ class Profile extends Component {
   }
 
   render(){
-    console.log(this.props.users)
+    
     const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.users.user.id}`
     
     if (this.props.users.user.stripe_uid && !this.props.users.stripeAct.error) {
@@ -105,9 +111,9 @@ class Profile extends Component {
                             </TableHead>
                             <TableBody>
                               <TableRow>
-                                <TableCell align=""><Email />{this.props.users.stripeAct.email}</TableCell>
-                                <TableCell align=""><Phone />{this.props.users.stripeAct.business_profile.support_phone}</TableCell>
-                                <TableCell align=""></TableCell>
+                                <TableCell><Email />{this.props.users.stripeAct.email}</TableCell>
+                                <TableCell><Phone />{this.props.users.stripeAct.business_profile.support_phone}</TableCell>
+                                <TableCell></TableCell>
                               </TableRow>
                             </TableBody>
                           </Table>
@@ -126,13 +132,13 @@ class Profile extends Component {
                                 {this.props.users.stripeBalance.available.map(balance => {
                                   let price = parseFloat(balance.amount)/100
                                   let fixedPrice = price.toFixed(2)
-                                  return <TableCell align="">Available Funds: ${fixedPrice}</TableCell>
+                                  return <TableCell >Available Funds: ${fixedPrice}</TableCell>
                                 })}
 
                                 {this.props.users.stripeBalance.pending.map(balance => {
                                   let price = parseFloat(balance.amount)/100
                                   let fixedPrice = price.toFixed(2)
-                                  return <TableCell align="">Pending Funds: ${fixedPrice}</TableCell>
+                                  return <TableCell >Pending Funds: ${fixedPrice}</TableCell>
                                 })}
                                 
                               </TableRow>
@@ -177,6 +183,11 @@ class Profile extends Component {
               <Grid id="no-padding" item xs={10}>
                 <Grid className="profile-cards" item xs={8}>
                   <Typography variant="h4" gutterBottom>Hello, {this.props.users.user.first_name}</Typography>
+                  <a href={stripeURL}>
+                    <Fab variant="extended" aria-label="Delete" className="stripe-button">
+                      Set up Payments with Stripe
+                    </Fab>
+                  </a>
                     <ExpansionPanel>
                       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography className="">Your Donations</Typography>
@@ -197,7 +208,6 @@ class Profile extends Component {
                         </div>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    <a href={stripeURL}>Set up Payments with Stripe</a>
                   </Grid>
                 </Grid>
               </Grid>

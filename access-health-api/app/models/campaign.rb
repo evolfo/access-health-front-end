@@ -1,7 +1,7 @@
 class Campaign < ApplicationRecord
   before_save :set_end
 
-  has_many :donations, dependent: :nullify
+  has_many :donations
   belongs_to :user
   has_one_attached :photo
 

@@ -6,6 +6,7 @@ import './scss/home.scss';
 import './scss/profile.scss';
 import './scss/browse.scss';
 import './scss/create-campaign.scss';
+import './scss/loader.scss';
 import App from './App';
 import { createStore, applyMiddleware, compose } from 'redux'
 
