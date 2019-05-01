@@ -1,22 +1,22 @@
 .bubblingG {
 	text-align: center;
-	width:78px;
-	height:49px;
+	width:128px;
+	height:70px;
 	margin: auto;
 }
 
 .bubblingG span {
 	display: inline-block;
 	vertical-align: middle;
-	width: 10px;
-	height: 10px;
-	margin: 24px auto;
+	width: 20px;
+	height: 20px;
+	margin: 34px auto;
 	background: rgb(0,0,0);
-	border-radius: 49px;
-		-o-border-radius: 49px;
-		-ms-border-radius: 49px;
-		-webkit-border-radius: 49px;
-		-moz-border-radius: 49px;
+	border-radius: 70px;
+		-o-border-radius: 70px;
+		-ms-border-radius: 70px;
+		-webkit-border-radius: 70px;
+		-moz-border-radius: 70px;
 	animation: bubblingG 1.5s infinite alternate;
 		-o-animation: bubblingG 1.5s infinite alternate;
 		-ms-animation: bubblingG 1.5s infinite alternate;

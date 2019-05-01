@@ -9,7 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { DropzoneArea } from 'material-ui-dropzone'
 
+import Loader from '../components/Loader'
 import { creatingCampaign, loadCampaigns } from '../actions/campaignActions';
+import { loadingStart, loadingEnd } from '../actions/loaderActions';
 
 class CreateCampaignContainer extends Component {
 
@@ -30,6 +32,9 @@ class CreateCampaignContainer extends Component {
   handleSubmit = (e) => {
   	e.preventDefault()
 
+  	this.props.loadingStart()
+  	// this.props.loader.loading
+
   	let urlEnding = this.state.title.split(' ').join('-').toLowerCase()
 
   	const formData = new FormData()
@@ -40,7 +45,10 @@ class CreateCampaignContainer extends Component {
   	formData.append('campaign[photo]', this.state.photo)
 
   	this.props.creatingCampaign(formData).then(() => {
-  		this.props.loadCampaigns().then(() => {this.props.history.push(`/browse/${urlEnding}`)})
+  		this.props.loadCampaigns().then(() => {
+  			this.props.loadingEnd()
+  			this.props.history.push(`/browse/${urlEnding}`)
+  		})
   	  }
   	)
   	
@@ -110,6 +118,7 @@ class CreateCampaignContainer extends Component {
 				        
 				      </form>
 				      <DropzoneArea onChange={this.handleUpload} />
+				      {this.props.loader.loading ? <Loader /> : null}
 				      <Button onClick={this.handleSubmit} variant="outlined" color="primary" className="">
 				        Submit
 				      </Button>
@@ -132,4 +141,4 @@ const mapStateToProps = state => {
 	return state
 }
 
-export default withRouter(connect(mapStateToProps, { creatingCampaign, loadCampaigns })(CreateCampaignContainer))
+export default withRouter(connect(mapStateToProps, { creatingCampaign, loadCampaigns, loadingStart, loadingEnd })(CreateCampaignContainer))

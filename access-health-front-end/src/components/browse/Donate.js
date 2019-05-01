@@ -8,6 +8,7 @@ import DonateModal from './DonateModal'
 import { donationModalOpen, donationModalClose } from '../../actions/modalActions'
 import { createADonation, getAllDonations } from '../../actions/donationActions'
 import { loadCampaigns } from '../../actions/campaignActions'
+import { loadingStart, loadingEnd } from '../../actions/loaderActions'
 
 import { injectStripe } from 'react-stripe-elements';
 
@@ -21,7 +22,6 @@ class Donate extends Component {
   	  donationAmount: 0,
   	  complete: false,
   	  message: '',
-      loading: false
   	}
   	this.handleClick = this.handleClick.bind(this)
   }
@@ -36,7 +36,7 @@ class Donate extends Component {
   handleClick = async (e) => {
   	e.preventDefault()
 
-    this.setState({loading: true})
+    this.props.loadingStart()
 
   	const amount = this.state.donationAmount * 100
 
@@ -64,9 +64,7 @@ class Donate extends Component {
   	  })
   	})
   	  .then(chargeObj => {
-        this.setState({
-          loading: false
-        })
+        this.props.loadingEnd()
   	  	this.props.createADonation(donationObj)
   	}).then(hello => {
   		this.props.donationModalClose()
@@ -91,7 +89,7 @@ class Donate extends Component {
     			    startAdornment: <InputAdornment position="start">$</InputAdornment>,
     			  }}
     			/>
-    			<DonateModal loading={this.state.loading} handleChange={this.handleChange} handleClick={this.handleClick} amount={this.state.donationAmount} open={this.props.modal.donationOpen} handleClickOpen={this.props.donationModalOpen} handleClose={this.props.donationModalClose} />
+    			<DonateModal loading={this.props.loader.loading} handleChange={this.handleChange} handleClick={this.handleClick} amount={this.state.donationAmount} open={this.props.modal.donationOpen} handleClickOpen={this.props.donationModalOpen} handleClose={this.props.donationModalClose} />
     		  </form>
     		  <Button onClick={this.props.donationModalOpen} variant="outlined" color="primary">Submit</Button>
     		</React.Fragment>
@@ -104,4 +102,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { donationModalOpen, donationModalClose, createADonation, getAllDonations, loadCampaigns })(injectStripe(Donate))
+export default connect(mapStateToProps, { donationModalOpen, donationModalClose, createADonation, getAllDonations, loadCampaigns, loadingStart, loadingEnd })(injectStripe(Donate))
