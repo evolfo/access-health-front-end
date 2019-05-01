@@ -4,13 +4,15 @@ import donationsReducer from './donationsReducer'
 import campaignsReducer from './campaignsReducer'
 import modalReducer from './modalReducer'
 import loadReducer from './loadReducer'
+import sortReducer from './sortReducer'
 
 const rootReducer = combineReducers({
   users: usersReducer,
   campaigns: campaignsReducer,
   donations: donationsReducer,
   modal: modalReducer,
-  loader: loadReducer
+  loader: loadReducer,
+  sort: sortReducer
 })
 
 export default rootReducer

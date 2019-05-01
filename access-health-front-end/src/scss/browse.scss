@@ -6,6 +6,11 @@
   padding: 1rem;
 }
 
+#browse-cards > div {
+  height: 5vh;
+  display: flex;
+}
+
 .browse-campaigns {
   section {
   	padding: 6rem;

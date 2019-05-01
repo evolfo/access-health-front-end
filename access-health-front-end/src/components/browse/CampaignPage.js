@@ -178,7 +178,7 @@ class CampaignPage extends Component {
 		  	  	  	</Grid>
 		  	  	    <Grid item xs={8}>
 		  	  	      <Typography variant="h5">
-		  	  	  	    Campaign ends on {this.state.campaign.ends}
+		  	  	  	    Campaign ends on {this.state.campaign.ends ? this.state.campaign.ends.split(' ').splice(0, 3).join(' ') : null}
 		  	  	  	  </Typography>
 		  	  	  	  <StripeProvider apiKey="pk_test_nxHkl553mJngNLPoDgeYG9aP00oaY8CYJm">
 			  	  	  	  <Elements> 

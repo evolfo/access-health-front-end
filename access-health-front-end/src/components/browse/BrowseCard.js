@@ -6,10 +6,32 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Route, Switch } from 'react-router-dom';
+import ProgressBar from '../../components/home/ProgressBar'
 
 import CampaignPage from './CampaignPage'
 
 const BrowseCard = props => {
+
+  const styles = {
+  	overlay: {
+  	  position: 'absolute',
+  	  color: 'black',
+  	  fontSize: '1.8rem',
+	  position: 'absolute',
+	  color: 'white',
+	  textShadow: '2px 2px 2px black',
+	  bottom: '0',
+	  margin: '0 auto',
+	  textAlign: 'center',
+	  width: '100%',
+	  marginTop: '-2px',
+	  backgroundColor: '#00000066',
+  	},
+
+  	p: {
+  	  marginBottom: '11px'
+  	}
+  }
   return (
     <Grid key={props.campaign.id} id="browse-cards" item xs={12}>
 	  <Card>
@@ -17,14 +39,18 @@ const BrowseCard = props => {
 	      <CardMedia
 	        className="home-card"
 	        image={`http://localhost:3000${props.campaign.photoUrl}`}
-	        title={props.campaign.title}
+	        title={`${props.campaign.title}` }
 	      />
+	      <div style={styles.overlay}>
+	        <p style={styles.p}>{`${props.campaign.title} // ${props.campaign.percent_complete}% funded`}</p>
+	      </div>
 	      <CardContent>
 	        <Typography gutterBottom variant="h6" component="h2">
 	          {props.campaign.title}
 	        </Typography>
 		    <Typography component="p">
 	          {props.campaign.description.slice(0, 100) + '...'}
+	          <ProgressBar unique={props} campaignId={props.campaign.id}/>
 	        </Typography>
 	      </CardContent>
 	    </CardActionArea>

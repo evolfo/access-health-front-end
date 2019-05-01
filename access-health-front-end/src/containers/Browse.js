@@ -15,7 +15,7 @@ class Browse extends Component {
   }
 
   render() {
-    console.log(this.props.campaigns)
+    
   	let allCampaigns;
   	if (this.props.campaigns.campaigns[0]) {
 

@@ -72,6 +72,7 @@
 
   .home-card {
     min-height: 20vh;
+    position: relative;
   }
 
 }
@@ -99,8 +100,14 @@
     span {
       padding-top: .25rem;
       float: right;
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
+
+   .goal-display {
+    display: inline-grid;
+    padding: 1.5rem;
+    color: black;
+  }
 }
 
 
