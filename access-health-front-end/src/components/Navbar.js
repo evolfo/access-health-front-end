@@ -12,6 +12,7 @@ import SignupModal from './SignupModal'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import IconButton from '@material-ui/core/IconButton';
 
+import Search from '../containers/Search'
 import { logOut } from '../actions/userActions'
 import { loginModalOpen, loginModalClose, signupModalOpen, signupModalClose } from '../actions/modalActions'
 
@@ -20,7 +21,6 @@ class Navbar extends Component {
   handleLogOut = () => {
     this.props.history.push('/')
     this.props.logOut();
-
   }
  
   render() {
@@ -36,14 +36,7 @@ class Navbar extends Component {
           <Toolbar>
             <Link to='/'>Home</Link>
             <Link to='/browse'>Browse Campaigns</Link>
-            <div className="navbar-search">
-              <div className="">
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Find a campaign to support"
-              />
-            </div>
+              <Search />
             <div className="login-signup">
               { !localStorage.token || localStorage.token === "undefined" ? 
               <React.Fragment>

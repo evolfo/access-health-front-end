@@ -82,6 +82,15 @@ class Profile extends Component {
   }
 
   render(){
+
+    const styles = {
+      profileText: {
+        display: 'inline-block',
+        padding: '1rem',
+        marginTop: '-17px',
+        verticalAlign: 'middle'
+      }
+    }
     
     const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.users.user.id}`
     
@@ -94,11 +103,11 @@ class Profile extends Component {
   		  	    <Grid id="no-padding" item xs={10}>
     		  	    <Grid className="profile-cards" item xs={8}>
                   <Typography variant="h4" gutterBottom>Hello, {this.props.users.user.first_name}</Typography>
-                  <ExpansionPanel>
+                  <ExpansionPanel defaultExpanded="true">
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography className="">Stripe Payment Profile</Typography>
                     </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
+                    <ExpansionPanelDetails >
                       <div className="accordian-content">
                         <Paper className="accordian-table">
                           <Table className="">
@@ -111,8 +120,8 @@ class Profile extends Component {
                             </TableHead>
                             <TableBody>
                               <TableRow>
-                                <TableCell><Email />{this.props.users.stripeAct.email}</TableCell>
-                                <TableCell><Phone />{this.props.users.stripeAct.business_profile.support_phone}</TableCell>
+                                <TableCell><Email /><div style={styles.profileText}>{this.props.users.stripeAct.email}</div></TableCell>
+                                <TableCell><Phone /><div style={styles.profileText}>{this.props.users.stripeAct.business_profile.support_phone}</div></TableCell>
                                 <TableCell></TableCell>
                               </TableRow>
                             </TableBody>
@@ -129,18 +138,19 @@ class Profile extends Component {
                             </TableHead>
                             <TableBody>
                               <TableRow>
-                                {this.props.users.stripeBalance.available.map(balance => {
+                                {this.props.users.stripeBalance.available ? 
+                                  this.props.users.stripeBalance.available.map(balance => {
                                   let price = parseFloat(balance.amount)/100
                                   let fixedPrice = price.toFixed(2)
                                   return <TableCell >Available Funds: ${fixedPrice}</TableCell>
-                                })}
+                                }) : null}
 
-                                {this.props.users.stripeBalance.pending.map(balance => {
+                                {this.props.users.stripeBalance.available ? 
+                                  this.props.users.stripeBalance.pending.map(balance => {
                                   let price = parseFloat(balance.amount)/100
                                   let fixedPrice = price.toFixed(2)
                                   return <TableCell >Pending Funds: ${fixedPrice}</TableCell>
-                                })}
-                                
+                                }) : null}
                               </TableRow>
                             </TableBody>
                           </Table>

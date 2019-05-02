@@ -7,9 +7,10 @@ const Footer = props => {
   return (
   	<Grid container justify="center" spacing={24}>
 	  <Grid className="footer-wrapper" item xs={12}>
-	  	<div className="footer">
+	  	<footer className="footer">
 	  	  <Typography variant="h6">© Spampinato Design</Typography>
-	  	</div>
+	  	  <p>Privacy | Terms of use | <a href="/">Home</a> </p>
+	  	</footer>
 	  </Grid>
 	</Grid>
   )

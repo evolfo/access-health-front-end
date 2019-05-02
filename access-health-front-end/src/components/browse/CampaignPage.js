@@ -71,7 +71,6 @@ class CampaignPage extends Component {
   }
 
   render (){
-  	// this.state.campaign.id
   
   	const user = this.props.users.user
   	console.log(this.state.campaign)
@@ -80,10 +79,15 @@ class CampaignPage extends Component {
   	  padding: '15rem'
   	}
 
+  	// This statement renders if the campaign is owned by the current user that is logged in
+  	// Allows the user to edit the title and description of their own campaign
   	if (user.id === this.state.campaign.user_id) {
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">
+	  	 	  <div class="pyro">
+  			   <div class="before"></div>
+  			   <div class="after"></div>
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
 		  	  	  	<Grid item xs={10}>
@@ -164,9 +168,11 @@ class CampaignPage extends Component {
 			  	    </Grid>
 			  	  </Grid>
 			  	</section>
+			  </div>
 		  	</div>
 	  	  </React.Fragment>
   		)
+  	// This renders if the campaign is not owned by the user viewing the page
   	} else {
 	  	return(
 	  	  <React.Fragment>

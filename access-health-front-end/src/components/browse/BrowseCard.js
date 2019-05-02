@@ -32,34 +32,39 @@ const BrowseCard = props => {
   	  marginBottom: '11px'
   	}
   }
-  return (
-    <Grid key={props.campaign.id} id="browse-cards" item xs={12}>
-	  <Card>
-	    <CardActionArea>
-	      <CardMedia
-	        className="home-card"
-	        image={`http://localhost:3000${props.campaign.photoUrl}`}
-	        title={`${props.campaign.title}` }
-	      />
-	      <div style={styles.overlay}>
-	        <p style={styles.p}>{`${props.campaign.title} // ${props.campaign.percent_complete}% funded`}</p>
-	      </div>
-	      <CardContent>
-	        <Typography gutterBottom variant="h6" component="h2">
-	          {props.campaign.title}
-	        </Typography>
-		    <Typography component="p">
-	          {props.campaign.description.slice(0, 100) + '...'}
-	          <ProgressBar unique={props} campaignId={props.campaign.id}/>
-	        </Typography>
-	      </CardContent>
-	    </CardActionArea>
-	  </Card>
-	  	<Switch>
-		  
-	    </Switch>
-    </Grid>
-  )
+
+  if (props.campaign.successful) {
+  	return null
+  } else {
+	  return (
+	    <Grid key={props.campaign.id} id="browse-cards" item xs={12}>
+		  <Card>
+		    <CardActionArea>
+		      <CardMedia
+		        className="home-card"
+		        image={`http://localhost:3000${props.campaign.photoUrl}`}
+		        title={`${props.campaign.title}` }
+		      />
+		      <div style={styles.overlay}>
+		        <p style={styles.p}>{`${props.campaign.title} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		      </div>
+		      <CardContent>
+		        <Typography gutterBottom variant="h6" component="h2">
+		          {props.campaign.title}
+		        </Typography>
+			    <Typography component="p">
+		          {props.campaign.description.slice(0, 100) + '...'}
+		          <ProgressBar unique={props} campaignId={props.campaign.id}/>
+		        </Typography>
+		      </CardContent>
+		    </CardActionArea>
+		  </Card>
+		  	<Switch>
+			  
+		    </Switch>
+	    </Grid>
+	  )
+	}
 }
 
 export default BrowseCard

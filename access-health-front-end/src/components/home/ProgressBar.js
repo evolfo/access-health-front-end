@@ -4,12 +4,12 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux'
 
 const ProgressBar = props => {
-
   const campaign = props.campaigns.campaigns.find(campaign => {
   	return campaign.id === props.campaignId
   })
-  // Home page progress bar
-  if (props.unique) {
+  console.log(props.search)
+  // Search bar progress bar
+  if (props.search) {
 	  return (
 	  	<div className="progress-bar">
 	  	  <Filler percentComplete={campaign.percent_complete} />
@@ -19,8 +19,17 @@ const ProgressBar = props => {
 	  	</div>
 	  )
   // Campaign page progress bar
-  } else if (campaign) {
+  } else if (props.unique) {
   	  return (
+	  	<div className="progress-bar">
+	  	  <Filler percentComplete={campaign.percent_complete} />
+	  	  <div className="goal-display">
+	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal} goal` : <p>$0/${campaign.goal}</p>} </span>
+	  	  </div>
+	  	</div>
+	  )
+  } else if (campaign) {
+  	return (
 	  	<div className="progress-bar">
 	  	  <Filler percentComplete={campaign.percent_complete} />
 	  	  <Typography variant="h6">

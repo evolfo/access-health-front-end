@@ -10,12 +10,10 @@ import { sortTerm } from '../../actions/sortActions'
 class Filter extends Component {
 
   handleFilterChange = (e) => {
-    console.log(e.target.value)
     this.props.sortTerm(e.target.value)
   }
 
   render(){
-    console.log(this.props)
   	return (
   	  <form className="" autoComplete="off">
         <FormControl className="">
@@ -24,12 +22,11 @@ class Filter extends Component {
             value={this.props.sort.term}
             onChange={this.handleFilterChange}
           >
-            <MenuItem value="All">
-              <em>All Campaigns</em>
+            <MenuItem value="lowest-cost-to-complete">
+              <em>Lowest Cost to Complete</em>
             </MenuItem>
             <MenuItem value="fewest-days">Fewest Days Left</MenuItem>
             <MenuItem value="newest">Newest</MenuItem>
-            <MenuItem value='lowest-cost-to-complete'>Lowest Cost to Complete</MenuItem>
           </Select>
         </FormControl>
       </form>
