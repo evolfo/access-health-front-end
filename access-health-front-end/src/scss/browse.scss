@@ -24,7 +24,9 @@
 #campaign-page {
   h4 {margin-top: 3rem;}
 
-  h5 {margin-top: 3rem;}
+  h5 {
+    margin-top: 1rem;
+  }
 
   .campaign-page-card {
     margin-top: 2rem;
@@ -32,6 +34,20 @@
 
   .filler {
     max-width: 100%;
+  }
+
+  .campaign-page-donation-div {
+    display: inline-flex;
+    width: 100%;
+
+    form {
+      padding-right: 1rem;
+    }
+
+    h5 {
+      text-align: right;
+      width: 100%;
+    }
   }
 }
 

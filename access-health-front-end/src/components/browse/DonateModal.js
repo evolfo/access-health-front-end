@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
 
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
@@ -26,6 +27,7 @@ class DonateModal extends Component {
 		  aria-labelledby="form-dialog-title"
 		>
 		  <DialogTitle id="form-dialog-title">Donate</DialogTitle>
+		  {this.props.amount < 5 ? <Typography style={this.styles} variant="body1">Your donation must be more than $5.</Typography> : null }
 		    <form>
 			  <DialogContent>
 			    <TextField

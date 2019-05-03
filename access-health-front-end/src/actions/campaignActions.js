@@ -16,6 +16,10 @@ const removeCampaign = (campaignId) => {
   return { type: 'DELETE_CAMPAIGN', payload: campaignId }
 }
 
+export const currentCampaign = campaignObj => {
+  return { type: 'CURRENT_CAMPAIGN', payload: campaignObj }
+}
+
 // THUNK
 
 //loading all campaigns

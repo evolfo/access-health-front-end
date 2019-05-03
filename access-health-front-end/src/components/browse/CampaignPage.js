@@ -31,8 +31,6 @@ class CampaignPage extends Component {
   	  return currentTitle === campaign.title.toLowerCase()
   	})
 
-  	console.log(this.props.campaigns)
-
   	if (campaign) {
   		let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
 
@@ -79,15 +77,54 @@ class CampaignPage extends Component {
   	  padding: '15rem'
   	}
 
-  	// This statement renders if the campaign is owned by the current user that is logged in
-  	// Allows the user to edit the title and description of their own campaign
-  	if (user.id === this.state.campaign.user_id) {
+  	
+  	
+  	// Shows fireworks if the campaign is successful! 
+  	if (this.state.campaign.successful && user.id === this.state.campaign.user_id) {
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">
 	  	 	  <div class="pyro">
   			   <div class="before"></div>
   			   <div class="after"></div>
+	  	 		<section id="campaign-page">
+		  	  	  <Grid container direction="row" justify="center" alignItems="center">
+		  	  	  	<Grid item xs={10}>
+		  	  	  	  <ProgressBar campaignId={this.state.campaign.id} goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
+		  	  	  	</Grid>
+		  	  	    <Grid item xs={8}>
+		  	  	      <Typography variant="h5">
+		  	  	  	    Campaign ends on {this.state.campaign.ends}
+		  	  	  	  </Typography>
+			  	      <Card className="campaign-page-card">
+					      <div style={imgBackgroundStyle}>
+					      </div>
+					      <CardContent>
+			    	        <Typography gutterBottom variant="h4" component="h2">
+				              {this.state.title}
+					        </Typography>
+					        <Typography variant="body1">
+					          {this.state.description}
+					        </Typography>
+
+					        <Typography variant="overline" gutterBottom>
+						      Campaign by {this.state.campaign.owner}
+					        </Typography>
+					      </CardContent>
+					  </Card>
+			  	    </Grid>
+			  	  </Grid>
+			  	</section>
+			  </div>
+		  	</div>
+	  	  </React.Fragment>
+  		)
+  	// This statement renders if the campaign is owned by the current user that is logged in
+  	// Allows the user to edit the title and description of their own campaign
+  	} if (user.id === this.state.campaign.user_id) {
+  		return(
+  		  <React.Fragment>
+	  	 	<div className="container">
 	  	 		<section id="campaign-page">
 		  	  	  <Grid container direction="row" justify="center" alignItems="center">
 		  	  	  	<Grid item xs={10}>
@@ -168,7 +205,6 @@ class CampaignPage extends Component {
 			  	    </Grid>
 			  	  </Grid>
 			  	</section>
-			  </div>
 		  	</div>
 	  	  </React.Fragment>
   		)
@@ -183,14 +219,16 @@ class CampaignPage extends Component {
 		  	  	  	  <ProgressBar campaignId={this.state.campaign.id} goal={this.state.campaign.goal} amount={this.state.campaign.current_amount} percentComplete={this.state.campaign.percent_complete} />
 		  	  	  	</Grid>
 		  	  	    <Grid item xs={8}>
-		  	  	      <Typography variant="h5">
-		  	  	  	    Campaign ends on {this.state.campaign.ends ? this.state.campaign.ends.split(' ').splice(0, 3).join(' ') : null}
-		  	  	  	  </Typography>
-		  	  	  	  <StripeProvider apiKey="pk_test_nxHkl553mJngNLPoDgeYG9aP00oaY8CYJm">
-			  	  	  	  <Elements> 
-			  	  	  	  	<Donate campaign={this.state.campaign}/>
-			  	  	  	  </Elements>
-			  	  	  </StripeProvider>
+		  	  	    	<div className='campaign-page-donation-div'>   
+			  	  	  	  <StripeProvider apiKey="pk_test_nxHkl553mJngNLPoDgeYG9aP00oaY8CYJm">
+				  	  	  	  <Elements> 
+				  	  	  	  	<Donate campaign={this.state.campaign}/>
+				  	  	  	  </Elements>
+				  	  	  </StripeProvider>
+				  	  	  <Typography variant="h5">
+			  	  	  	    Campaign ends on {this.state.campaign.ends ? this.state.campaign.ends.split(' ').splice(0, 3).join(' ') : null}
+			  	  	  	  </Typography>
+				  	  	</div>
 			  	      <Card className="campaign-page-card">
 					      <div style={imgBackgroundStyle}>
 					      </div>

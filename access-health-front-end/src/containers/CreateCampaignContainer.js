@@ -33,7 +33,6 @@ class CreateCampaignContainer extends Component {
   	e.preventDefault()
 
   	this.props.loadingStart()
-  	// this.props.loader.loading
 
   	let urlEnding = this.state.title.split(' ').join('-').toLowerCase()
 

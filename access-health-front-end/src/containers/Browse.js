@@ -27,7 +27,7 @@ class Browse extends Component {
 
   	  	return (
   	  	  <Link to={`/browse/${urlEnding}`} key={campaign.id}>
-  	  	    <BrowseCard campaign={campaign} />
+  	  	    <BrowseCard fromBrowse={campaign} campaign={campaign} />
   	  	  </Link>
   	  	)
   	  })
@@ -62,7 +62,7 @@ class Browse extends Component {
 
         return (
           <Link to={`/browse/${urlEnding}`} key={campaign.id}>
-            <BrowseCard campaign={campaign} />
+            <BrowseCard fromBrowse={campaign} campaign={campaign} />
           </Link>
         )
       })
@@ -101,7 +101,7 @@ class Browse extends Component {
 
         return (
           <Link to={`/browse/${urlEnding}`} key={campaign.id}>
-            <BrowseCard campaign={campaign} />
+            <BrowseCard fromBrowse={campaign} campaign={campaign} />
           </Link>
         )
       })

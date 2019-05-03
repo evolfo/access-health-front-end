@@ -53,10 +53,10 @@ class Search extends Component {
 	            const className = part.highlight ? 'highlight' : null;
 	            return (
 	              <React.Fragment>
-		            <a href={`/browse/${urlEnding}`} key={suggestion.id}>
-		              <span className={className} key={index}>{part.text}</span>
-		            </a>
-		          </React.Fragment>
+    		            <a href={`/browse/${urlEnding}`} key={suggestion.id}>
+    		              <span className={className} key={index}>{part.text}</span>
+    		            </a>
+		            </React.Fragment>
 	            );
 	          })
 	        }

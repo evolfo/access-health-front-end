@@ -32,8 +32,8 @@ const BrowseCard = props => {
   	  marginBottom: '11px'
   	}
   }
-
-  if (props.campaign.successful) {
+  // Prevents completed campaigns from showing up on the browse page
+  if (props.campaign.successful && props.fromBrowse) {
   	return null
   } else {
 	  return (
