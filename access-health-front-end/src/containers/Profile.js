@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+import Moment from 'react-moment';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -50,17 +51,29 @@ class Profile extends Component {
   generateDonations = () => {
   	return this.props.users.user.donations.map(donation => {
 
+      const styles = {
+        secondListItem: {
+          textAlign: 'right'
+        }
+      }
+
       let urlEnding = donation.campaign_title.split(' ').join('-').toLowerCase()
 
   	  return (
-  	  	<List>
+  	  	<List className="alternate-background">
           <Link key={donation.id} to={`/browse/${urlEnding}`}>
             <ListItem>
               <ListItemText
                 primary={`Campaign: ${donation.campaign_title}`}
                 secondary={`by ${donation.campaign_owner}`}
               />
-              <p>Amount: ${donation.amount}</p>
+              <ListItemText
+                style={styles.secondListItem}
+                primary={`Amount: $${donation.amount}`}
+                secondary={<Moment format="D MMM YYYY HH:MM" withTitle>{donation.created_at}</Moment>}
+              />
+
+              <div></div>
             </ListItem>
           </Link>
       	</List>
@@ -89,8 +102,12 @@ class Profile extends Component {
         padding: '1rem',
         marginTop: '-17px',
         verticalAlign: 'middle'
+      },
+      flex: {
+        display: 'flex'
       }
     }
+    console.log(this.props.users)
     
     const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.users.user.id}`
     
@@ -113,7 +130,7 @@ class Profile extends Component {
                           <Table className="">
                             <TableHead>
                               <TableRow>
-                                <TableCell><Typography variant="h5"><Person />Connected Account</Typography></TableCell>
+                                <TableCell><Typography style={styles.flex} variant="h5"><Person />Connected Account</Typography></TableCell>
                                 <TableCell></TableCell>
                                 <TableCell></TableCell>
                               </TableRow>
@@ -131,7 +148,7 @@ class Profile extends Component {
                           <Table className="">
                             <TableHead>
                               <TableRow>
-                                <TableCell><Typography variant="h5"><Money />Balance</Typography></TableCell>
+                                <TableCell><Typography style={styles.flex} variant="h5"><Money />Balance</Typography></TableCell>
                                 <TableCell></TableCell>
                                
                               </TableRow>

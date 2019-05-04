@@ -6,16 +6,15 @@ import CampaignCard from './CampaignCard'
 
 const HomeSupportCampaign = props => {
 
-  let homeCampaigns = []
   let homeCampaignsGenerator
 
-  for (let i = 0; i < 3; i++) {
-  	homeCampaigns.push(props.campaigns.campaigns[i])
-  }
+  const unfinishedCampaigns = props.campaigns.campaigns.filter(campaign => {
+  	return campaign.successful === false
+  })
 
-  if ((homeCampaigns[0] && homeCampaigns[1])) {
+  if ((unfinishedCampaigns[0] && unfinishedCampaigns[1])) {
 
-	  homeCampaignsGenerator = homeCampaigns.map(campaign => {
+	  homeCampaignsGenerator = unfinishedCampaigns.slice(0, 3).map(campaign => {
 	  	let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
 
 	  	return (
@@ -31,7 +30,7 @@ const HomeSupportCampaign = props => {
   	  <Grid className="campaigns-to-support" container spacing={24}>
 	  	  <Grid item xs={12}>
 	  	    <Typography variant="h4">Campaigns to Support</Typography>
-	  	    <Grid id="campaigns-to-support" item xs={10}>
+	  	    <Grid id="campaigns-to-support" xs={12}>
 	  	      {homeCampaignsGenerator}
 	  	    </Grid>
 	  	  </Grid>

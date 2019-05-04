@@ -27,7 +27,7 @@ class Navbar extends Component {
     
     let username = ''
     
-    if (localStorage.token !== "undefined") { 
+    if (localStorage.token && localStorage.token !== "undefined") { 
       username = this.props.users.user.first_name
     }  
     return (

@@ -38,7 +38,7 @@ const BrowseCard = props => {
   } else {
 	  return (
 	    <Grid key={props.campaign.id} id="browse-cards" item xs={12}>
-		  <Card>
+		  <Card className="browse-campaign-card">
 		    <CardActionArea>
 		      <CardMedia
 		        className="home-card"
@@ -46,7 +46,11 @@ const BrowseCard = props => {
 		        title={`${props.campaign.title}` }
 		      />
 		      <div style={styles.overlay}>
-		        <p style={styles.p}>{`${props.campaign.title} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		        {props.campaign.title.length > 25 ? 
+		          <p style={styles.p}>{`${props.campaign.title.slice(0, 25) + '...'} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		        :	
+		          <p style={styles.p}>{`${props.campaign.title} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		        }
 		      </div>
 		      <CardContent>
 		        <Typography gutterBottom variant="h6" component="h2">
@@ -54,7 +58,6 @@ const BrowseCard = props => {
 		        </Typography>
 			    <Typography component="p">
 		          {props.campaign.description.slice(0, 100) + '...'}
-		          <ProgressBar unique={props} campaignId={props.campaign.id}/>
 		        </Typography>
 		      </CardContent>
 		    </CardActionArea>

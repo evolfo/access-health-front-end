@@ -7,7 +7,6 @@ const ProgressBar = props => {
   const campaign = props.campaigns.campaigns.find(campaign => {
   	return campaign.id === props.campaignId
   })
-  console.log(props.search)
   // Search bar progress bar
   if (props.search) {
 	  return (

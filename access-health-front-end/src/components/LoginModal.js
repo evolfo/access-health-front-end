@@ -8,8 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { connect } from 'react-redux';
-import { getAuth } from '../actions/userActions';
+import { getAuth, getStripeAct, gettingStripeBalance, gettingStripeBalanceHistory } from '../actions/userActions';
 import { withRouter } from "react-router-dom";
+
+import store from '../index'
 
 class LoginModal extends Component {
 
@@ -28,6 +30,13 @@ class LoginModal extends Component {
 		e.preventDefault()
 		this.props.handleClose()
 		this.props.getAuth(this.state)
+		  .then(resp => {
+		  	if (localStorage.token != "undefined" && store.getState().users.user.stripe_uid) {
+			  	this.props.getStripeAct(store.getState().users.user.stripe_uid)
+			  	this.props.gettingStripeBalance(store.getState().users.user.stripe_uid)
+			  	this.props.gettingStripeBalanceHistory(store.getState().users.user.stripe_uid)
+			}
+		  })
 		setTimeout(() => {
 			if(localStorage.token && localStorage.token != "undefined") {
 			  this.props.history.push('/')
@@ -87,4 +96,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps, { getAuth })(withRouter(LoginModal))
+export default connect(mapStateToProps, { getAuth, getStripeAct, gettingStripeBalance, gettingStripeBalanceHistory })(withRouter(LoginModal))

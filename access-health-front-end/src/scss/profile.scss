@@ -23,4 +23,18 @@
   .stripe-button {
     margin: 2rem;
   }
+
+  .alternate-background:hover {
+    background-color: #4896f542;
+    transition: 0.2s
+  }
+
+  .alternate-background:nth-child(odd) {
+    background-color: #26466d0d;
+  }
+
+  .alternate-background:nth-child(odd):hover {
+    background-color: #4896f542;
+    transition: 0.2s
+  }
 }

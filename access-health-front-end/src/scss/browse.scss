@@ -4,6 +4,14 @@
   }
 
   padding: 1rem;
+
+  .browse-campaign-card {
+    transition: 0.1s;
+  }
+
+  .browse-campaign-card:hover {
+    transform: scale(1.05);
+  }
 }
 
 #browse-cards > div {
@@ -39,7 +47,8 @@
   .campaign-page-donation-div {
     display: inline-flex;
     width: 100%;
-
+    margin-top: 2rem;
+    
     form {
       padding-right: 1rem;
     }
@@ -60,4 +69,11 @@
 
 .campaign-page-card > div {
   background-size: cover !important;
+}
+
+#donation-modal {
+
+  .MuiPaper-root-10 {
+    min-width: 500px;
+  }
 }

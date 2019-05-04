@@ -10,7 +10,7 @@ import ProgressBar from './ProgressBar'
 const CampaignCard = props => {
   return (
   	<Grid item xs={4}>
-  	  <CardActionArea>
+  	  <CardActionArea className="campaign-card">
       	<Card>   
 	      <CardMedia
 	        className="home-card"

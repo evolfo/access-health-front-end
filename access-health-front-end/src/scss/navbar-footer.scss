@@ -12,7 +12,10 @@
   }
 
   header {
-  	background-color: #26476d;
+  	background: #020024;
+    background: -webkit-gradient(linear, left top, right top, from(#1968d2c9), color-stop(35%, #6c6cbb), to(#26476d));
+    background: -webkit-linear-gradient(left, #1968d2c9 0%, #6c6cbb 35%, #26476d 100%);
+    background: linear-gradient(90deg, #1968d2c9 0%, #6c6cbb 35%, #26476d 100%);
   }
 
   .login-signup {
@@ -39,7 +42,10 @@
     width: 100%;
     padding-top: 4rem;
     padding-bottom: 4rem;
-    background-color: #26476d;
+    background: #020024;
+    background: -webkit-gradient(linear, left top, right top, from(#1968d2c9), color-stop(35%, #6c6cbb), to(#26476d));
+    background: -webkit-linear-gradient(left, #1968d2c9 0%, #6c6cbb 35%, #26476d 100%);
+    background: linear-gradient(90deg, #1968d2c9 0%, #6c6cbb 35%, #26476d 100%);
     text-align: center;
 
     h6, p, a {

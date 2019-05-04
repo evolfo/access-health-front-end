@@ -16,6 +16,7 @@ const usersReducer = (state = initialState, action) => {
       }
 
     case "LOG_IN":
+      console.log(action.payload.user)
       localStorage.setItem("token", action.payload.jwt)
       return {
       	...state,
@@ -31,7 +32,10 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         user: {},
         pendingRequest: false,
-        error: null
+        error: null,
+        stripeAct: null,
+        stripeBalance: [],
+        stripeBalanceHistory: []
       }
 
     case "CREATE_USER":
@@ -44,14 +48,21 @@ const usersReducer = (state = initialState, action) => {
       }
 
     case "GET_USERS":
-      const currentUser = action.payload.find(user => {
-        return user.id === state.user.id
-      })
-      
-      return {
+      if (state.user) {
+        const currentUser = action.payload.find(user => {
+          return user.id === state.user.id
+        })
+        
+        return {
+          ...state,
+          ...action.payload,
+          user: currentUser
+        }
+      } else {
+
+      } return {
         ...state,
-        ...action.payload,
-        user: currentUser
+        ...action.payload
       }
 
     case "LOG_IN_ERROR":

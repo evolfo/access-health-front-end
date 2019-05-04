@@ -20,14 +20,26 @@ import { withRouter } from "react-router-dom";
 class DonateModal extends Component {
 
 	render() {
+
+		const styles = {
+	  	  para: {
+	  	    textAlign: 'center',
+    	    color: '#f70000'
+	      },
+	      card: {
+	      	marginTop: '1.5rem'
+	      }
+	    }
+
 		return (
 		<Dialog
 		  open={this.props.open}
 		  onClose={this.props.handleClose}
 		  aria-labelledby="form-dialog-title"
+		  id="donation-modal"
 		>
 		  <DialogTitle id="form-dialog-title">Donate</DialogTitle>
-		  {this.props.amount < 5 ? <Typography style={this.styles} variant="body1">Your donation must be more than $5.</Typography> : null }
+		  {this.props.amount < 5 ? <Typography style={styles.para} variant="body1">Your donation must be more than $5.</Typography> : null }
 		    <form>
 			  <DialogContent>
 			    <TextField
@@ -52,9 +64,10 @@ class DonateModal extends Component {
 			      value={this.props.message}
 			      onChange={this.props.handleChange}
 			    />
-
+			  <div style={styles.card}>
+			  	<CardElement />
+			  </div>
 			  </DialogContent>
-			  <CardElement />
 			</form>
 			{this.props.loading ? <Loader /> : null}
 		  <DialogActions>

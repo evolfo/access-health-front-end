@@ -1,5 +1,5 @@
 class Campaign < ApplicationRecord
-  before_save :set_end
+  before_save :set_end, :set_successful
 
   has_many :donations
   belongs_to :user
@@ -27,5 +27,9 @@ class Campaign < ApplicationRecord
 
   def ends
     self.campaign_end.to_formatted_s(:long_ordinal)
+  end
+
+  def set_successful
+    self.successful = false
   end
 end

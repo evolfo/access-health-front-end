@@ -71,7 +71,7 @@ class CampaignPage extends Component {
   render (){
   
   	const user = this.props.users.user
-  	console.log(this.state.campaign)
+ 
   	const imgBackgroundStyle = {
   	  background: `url('http://localhost:3000${this.state.campaign.photoUrl}')`,
   	  padding: '15rem'
@@ -80,7 +80,7 @@ class CampaignPage extends Component {
   	
   	
   	// Shows fireworks if the campaign is successful! 
-  	if (this.state.campaign.successful && user.id === this.state.campaign.user_id) {
+  	if (this.state.campaign.successful && user && user.id === this.state.campaign.user_id) {
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">
@@ -121,7 +121,7 @@ class CampaignPage extends Component {
   		)
   	// This statement renders if the campaign is owned by the current user that is logged in
   	// Allows the user to edit the title and description of their own campaign
-  	} if (user.id === this.state.campaign.user_id) {
+  	} if (user && user.id === this.state.campaign.user_id) {
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">

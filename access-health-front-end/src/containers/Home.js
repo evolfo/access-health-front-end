@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import HomeBackground from '../components/home/HomeBackground'
 import HomeQuestion from '../components/home/HomeQuestion'
 import HomeSupportCampaign from '../components/home/HomeSupportCampaign'
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import { Link } from 'react-router-dom'
-// import { spacing } from '@material-ui/system';
+import About from '../components/home/About'
+
 import { connect} from 'react-redux'
 import { loadCampaigns } from '../actions/campaignActions'
+import store from '../index'
 
 class Home extends Component {
 
@@ -22,6 +20,7 @@ class Home extends Component {
   	  	<HomeBackground />
   	  	<HomeQuestion />
   	  	<HomeSupportCampaign campaigns={this.props.campaigns} />
+        <About />
   	  </React.Fragment>
   	)
   }

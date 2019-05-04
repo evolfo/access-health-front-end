@@ -23,3 +23,11 @@ export const donationModalOpen = () => {
 export const donationModalClose = () => {
   return { type: 'DONATION_MODAL_CLOSE' }
 }
+
+export const stripeModalOpen = () => {
+  return { type: 'STRIPE_MODAL_OPEN' }
+}
+
+export const stripeModalClose = () => {
+  return { type: 'STRIPE_MODAL_CLOSE' }
+}
