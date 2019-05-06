@@ -25,6 +25,12 @@ class Navbar extends Component {
  
   render() {
     
+    const style = {
+      firstA: {
+        paddingRight: '0px'
+      }
+    }
+
     let username = ''
     
     if (localStorage.token && localStorage.token !== "undefined") { 
@@ -34,7 +40,7 @@ class Navbar extends Component {
     	<div className="navbar">
         <AppBar position="static">
           <Toolbar>
-            <Link to='/'>Home</Link>
+            <Link style={style.firstA} to='/'><img src="/img/logo.png" /> </Link>
             <Link to='/browse'>Browse Campaigns</Link>
               <Search />
             <div className="login-signup">

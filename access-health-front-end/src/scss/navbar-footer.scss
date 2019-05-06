@@ -2,13 +2,18 @@
   a {
   	color: white;
   	text-decoration: none;
-  	padding: 1rem;
+  	padding: 1.5rem;
   	text-transform: uppercase;
+
+    img {
+      max-width: 168px;
+    }
   }
 
   a:hover {
   	color: #8bd0ff;
   	transition: 0.3s;
+    cursor: pointer;
   }
 
   header {
@@ -50,6 +55,11 @@
 
     h6, p, a {
       color: white;
+    }
+
+    img {
+      margin-bottom: 2rem;
+      max-width: 300px;
     }
     
   }

@@ -8,6 +8,7 @@ const Footer = props => {
   	<Grid container justify="center" spacing={24}>
 	  <Grid className="footer-wrapper" item xs={12}>
 	  	<footer className="footer">
+	  	  <img src="/img/logo.png" />
 	  	  <Typography variant="h6">© Spampinato Design</Typography>
 	  	  <p>Privacy | Terms of use | <a href="/">Home</a> </p>
 	  	</footer>
