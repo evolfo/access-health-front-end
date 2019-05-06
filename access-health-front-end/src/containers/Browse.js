@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-import { loadCampaigns } from '../actions/campaignActions'
+import ReactPaginate from 'react-paginate';
+import { loadCampaigns, loadSomeCampaigns } from '../actions/campaignActions'
 import { Link } from 'react-router-dom';
 
 import Filter from '../components/browse/Filter' 
@@ -10,15 +10,34 @@ import BrowseCard from '../components/browse/BrowseCard'
 
 class Browse extends Component {
 
-  componentDidMount() {
-  	this.props.loadCampaigns()
+  state = {
+    offset: 0
   }
+
+  componentDidMount() {
+    this.props.loadSomeCampaigns(this.state.offset)
+      .then(hi => {
+        this.setState({
+          pageCount: Math.ceil(this.props.campaigns.campaigns.length / 10)
+        })
+      })
+  }
+
+  handlePageClick = data => {
+
+    let selected = data.selected;
+    let offset = Math.ceil(selected * 10);
+
+    this.setState({ offset: offset }, () => {
+      this.props.loadSomeCampaigns(this.state.offset);
+    });
+  };
 
   render() {
   	let allCampaigns;
       // showing the campaigns that are closest to being funded
-  	if (this.props.campaigns.campaigns[0] && this.props.state.sort.term === 'lowest-cost-to-complete') {
-      let filteredCampaigns = this.props.campaigns.campaigns.sort(function(a, b) {
+  	if (this.props.campaigns.browseCampaigns[0] && this.props.state.sort.term === 'lowest-cost-to-complete') {
+      let filteredCampaigns = this.props.campaigns.browseCampaigns.sort(function(a, b) {
         return a.amount_left_to_fund - b.amount_left_to_fund
       })
 
@@ -32,8 +51,9 @@ class Browse extends Component {
   	  	)
   	  })
       // showing the campaigns that end sooner first
-  	} else if (this.props.campaigns.campaigns[0] && this.props.state.sort.term === 'newest') {
-      let filteredCampaigns = this.props.campaigns.campaigns.sort(function(a, b) {
+  	} else if (this.props.campaigns.browseCampaigns[0] && this.props.state.sort.term === 'newest') {
+      let filteredCampaigns = this.props.campaigns.browseCampaigns.sort(function(a, b) {
+
         let newA = a.ends.split(' ').slice(0, 3).join(' ').replace(/,/g, '')
         let newB = b.ends.split(' ').slice(0, 3).join(' ').replace(/,/g, '')
 
@@ -67,8 +87,8 @@ class Browse extends Component {
         )
       })
       // showing the campaigns that are closest to being done
-    } else if (this.props.campaigns.campaigns[0] && this.props.state.sort.term === 'fewest-days') {
-      let filteredCampaigns = this.props.campaigns.campaigns.sort(function(a, b) {
+    } else if (this.props.campaigns.browseCampaigns[0] && this.props.state.sort.term === 'fewest-days') {
+      let filteredCampaigns = this.props.campaigns.browseCampaigns.sort(function(a, b) {
         let newA = a.ends.split(' ').slice(0, 3).join(' ').replace(/,/g, '')
         let newB = b.ends.split(' ').slice(0, 3).join(' ').replace(/,/g, '')
 
@@ -116,6 +136,19 @@ class Browse extends Component {
   	  	  	  	<Filter />
   	  	  	  </div>
   	  	      {allCampaigns}
+              <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
+              />
   	  	    </section>
   	  	  </Grid>
   	  	</Grid>
@@ -131,4 +164,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { loadCampaigns })(Browse)
+export default connect(mapStateToProps, { loadCampaigns, loadSomeCampaigns })(Browse)

@@ -30,7 +30,7 @@ const HomeSupportCampaign = props => {
   	  <Grid className="campaigns-to-support" container spacing={24}>
 	  	  <Grid item xs={12}>
 	  	    <Typography variant="h4">Campaigns to Support</Typography>
-	  	    <Grid id="campaigns-to-support" xs={12}>
+	  	    <Grid id="campaigns-to-support" xs={8}>
 	  	      {homeCampaignsGenerator}
 	  	    </Grid>
 	  	  </Grid>

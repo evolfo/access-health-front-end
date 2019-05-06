@@ -75,7 +75,7 @@ class CreateCampaignContainer extends Component {
 	  	  <div className="container"> 
 	  	  	<section id="create-campaign">
 		  	  	<Grid container direction="row" justify="center" alignItems="center">
-			  	  <Grid item xs={10}>
+			  	  <Grid item xs={8}>
 			  	  	<Typography variant="h4" gutterBottom>Create a new Access Health Campaign</Typography>
 		  	  		  <form className="create-campaign-form" noValidate autoComplete="off">
 				        <TextField

@@ -5,6 +5,8 @@ class Campaign < ApplicationRecord
   belongs_to :user
   has_one_attached :photo
 
+  validates :title, format: { with: /\A[a-zA-Z0-9\s]+\z/i, message: "can only contain letters and numbers." }
+
   def owner
     self.user.first_name + ' ' + self.user.last_name
   end

@@ -4,6 +4,12 @@
   skip_before_action :authorized, only: [:create, :update, :index, :show]
 
   def index
+    if (params["limit"]) || (!!request.headers["HTTP_REFERRER"] && request.headers["HTTP_REFERER"].split(//).last(6).join == "browse")
+      campaigns = Campaign.all.select {|campaign| campaign.successful == false}
+      @campaigns = campaigns.slice(params["offset"].to_i, params["offset"].to_i + params["limit"].to_i)
+      render :index
+      return
+    end
   	@campaigns = Campaign.all
   	render :index
   end

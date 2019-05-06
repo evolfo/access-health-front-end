@@ -31,6 +31,7 @@ class CampaignPage extends Component {
   	  return currentTitle === campaign.title.toLowerCase()
   	})
 
+
   	if (campaign) {
   		let urlEnding = campaign.title.split(' ').join('-').toLowerCase()
 
@@ -61,6 +62,7 @@ class CampaignPage extends Component {
   	  editDisplayed: false
   	})
   	this.props.editingCampaign(this.state.title, this.state.description, this.state.campaign.id)
+  	  .then(this.props.loadCampaigns())
   }
 
   handleDelete = () => {
@@ -76,11 +78,10 @@ class CampaignPage extends Component {
   	  background: `url('http://localhost:3000${this.state.campaign.photoUrl}')`,
   	  padding: '15rem'
   	}
-
-  	
   	
   	// Shows fireworks if the campaign is successful! 
   	if (this.state.campaign.successful && user && user.id === this.state.campaign.user_id) {
+
   		return(
   		  <React.Fragment>
 	  	 	<div className="container">

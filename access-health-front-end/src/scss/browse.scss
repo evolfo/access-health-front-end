@@ -27,6 +27,34 @@
   .filter-container {
 	padding-bottom: 1rem;
   }
+
+  .pagination ul {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #4b5a95;
+  }
+
+  .pagination li {
+    display: inline-block;
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+    padding: .7rem;
+    cursor: pointer;
+  }
+
+  .previous, .next {
+    margin: 1rem;
+  }
+
+  .active {
+    background: #5a82d2;
+    color: white;
+  }
+
+  a {
+    outline: none;
+  }
 }
 
 #campaign-page {

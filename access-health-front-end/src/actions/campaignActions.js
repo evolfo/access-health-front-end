@@ -4,6 +4,10 @@ const getCampaigns = campaignObj => {
   return { type: 'GET_CAMPAIGNS', payload: campaignObj }
 };
 
+const getSomeCampaigns = campaignObj => {
+  return { type: 'GET_SOME_CAMPAIGNS', payload: campaignObj }
+};
+
 const createCampaign = campaignObj => {
   return { type: 'CREATE_CAMPAIGN', payload: campaignObj }
 };
@@ -28,11 +32,22 @@ export const loadCampaigns = () => {
     return fetch("http://localhost:3000/api/v1/campaigns")
       .then(resp => resp.json())
       .then(campaigns => {
-
         dispatch(getCampaigns(campaigns));
       });
   };
 };
+
+//loading 10 campaigns at a time for the browse page
+export const loadSomeCampaigns = offset => {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/campaigns?limit=10&offset=${offset}`)
+      .then(resp => resp.json())
+      .then(campaigns => {
+        dispatch(getSomeCampaigns(campaigns));
+      });
+  };
+};
+
 
 //editing a campaign
 export const editingCampaign = (title, description, campaignId) => {
