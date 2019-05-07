@@ -16,3 +16,11 @@
 ##### If you find a campaign you'd like to donate to, simply visit the campaign and donate! (You must authenticate using Stripe through the profile page first)
 
 ![Campaign Page](https://i.imgur.com/ybj2mEJ.png)
+
+Build with:
+- React
+- Redux
+- Rails
+- Stripe API
+- AWS
+- Material UI
