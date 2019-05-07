@@ -42,7 +42,7 @@ const BrowseCard = props => {
 		    <CardActionArea>
 		      <CardMedia
 		        className="home-card"
-		        image={`http://localhost:3000${props.campaign.photoUrl}`}
+		        image={`https://access-health-api.herokuapp.com${props.campaign.photoUrl}`}
 		        title={`${props.campaign.title}` }
 		      />
 		      <div style={styles.overlay}>

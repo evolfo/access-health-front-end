@@ -49,7 +49,7 @@ class Donate extends Component {
 
   	const {token} = await this.props.stripe.createToken({name: this.props.users.user.first_name});
 
-  	let response = await fetch('http://localhost:3000/api/v1/charge', {
+  	let response = await fetch('https://access-health-api.herokuapp.com/api/v1/charge', {
   	  method: 'POST',
   	  headers: {
   	  	'Content-Type': 'application/json',

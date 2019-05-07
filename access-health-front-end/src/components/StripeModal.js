@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 
 const StripeModal = props => {
 
-	const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${props.users.user.id}`
+	const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=https://access-health-api.herokuapp.com/api/v1/oauth/callback&state=${props.users.user.id}`
 
 	const handleClick = () => {
 	  window.location.href = stripeURL

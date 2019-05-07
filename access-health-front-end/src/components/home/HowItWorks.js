@@ -39,10 +39,7 @@ function getDonateStepContent(step) {
       return `Search or browse through the list of all active campaigns and find 
       		  one that you'd like to support!`;
     case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
+      return `Make a donation`;
     default:
       return 'Unknown step';
   }

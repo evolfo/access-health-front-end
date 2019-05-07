@@ -1,3 +1,5 @@
+const BASE_URL = 'https://access-health-api.herokuapp.com'
+
 // DISPATCH
 
 export const createDonation = donationObj => {
@@ -12,7 +14,7 @@ const getDonations = donationsObj => {
 
 export const createADonation = donation => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/donations', {
+    fetch(BASE_URL + '/api/v1/donations', {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.token}`,
@@ -30,7 +32,7 @@ export const createADonation = donation => {
 
 export const getAllDonations = () => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/donations')
+    fetch(BASE_URL + '/api/v1/donations')
     .then(resp => resp.json())
     .then(donationsObj => {
       dispatch(getDonations(donationsObj))

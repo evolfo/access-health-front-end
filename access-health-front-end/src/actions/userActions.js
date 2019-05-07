@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000/api/v1/'
+const baseURL = 'https://access-health-api.herokuapp.com/api/v1/'
 
 // DISPATCH
 
@@ -91,7 +91,7 @@ export const newUser = userInfo => {
 //get all users
 export const getAllUsers = () => {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/users')
+    return fetch(baseURL + 'users')
       .then(resp => resp.json())
       .then(usersJson => {
         dispatch(getUsers(usersJson))

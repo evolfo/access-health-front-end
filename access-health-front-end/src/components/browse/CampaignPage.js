@@ -75,7 +75,7 @@ class CampaignPage extends Component {
   	const user = this.props.users.user
  
   	const imgBackgroundStyle = {
-  	  background: `url('http://localhost:3000${this.state.campaign.photoUrl}')`,
+  	  background: `url('https://access-health-api.herokuapp.com${this.state.campaign.photoUrl}')`,
   	  padding: '15rem'
   	}
   	

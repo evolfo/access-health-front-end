@@ -1,3 +1,5 @@
+const BASE_URL = 'https://access-health-api.herokuapp.com'
+
 // DISPATCH
 
 const getCampaigns = campaignObj => {
@@ -29,7 +31,7 @@ export const currentCampaign = campaignObj => {
 //loading all campaigns
 export const loadCampaigns = () => {
   return dispatch => {
-    return fetch("http://localhost:3000/api/v1/campaigns")
+    return fetch(BASE_URL + "/api/v1/campaigns")
       .then(resp => resp.json())
       .then(campaigns => {
         dispatch(getCampaigns(campaigns));
@@ -40,7 +42,7 @@ export const loadCampaigns = () => {
 //loading 10 campaigns at a time for the browse page
 export const loadSomeCampaigns = offset => {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/campaigns?limit=10&offset=${offset}`)
+    return fetch(BASE_URL + `/api/v1/campaigns?limit=10&offset=${offset}`)
       .then(resp => resp.json())
       .then(campaigns => {
         dispatch(getSomeCampaigns(campaigns));
@@ -52,7 +54,7 @@ export const loadSomeCampaigns = offset => {
 //editing a campaign
 export const editingCampaign = (title, description, campaignId) => {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/campaigns/' + campaignId, {
+    return fetch(BASE_URL + '/api/v1/campaigns/' + campaignId, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${localStorage.token}`,
@@ -71,7 +73,7 @@ export const editingCampaign = (title, description, campaignId) => {
 //creating a campaign
 export const creatingCampaign = (formData) => {
   return dispatch => {
-  	return fetch('http://localhost:3000/api/v1/campaigns', {
+  	return fetch(BASE_URL + '/api/v1/campaigns', {
   	  method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.token}`
@@ -88,7 +90,7 @@ export const creatingCampaign = (formData) => {
 //deleting a campaign
 export const deleteCampaign = (campaignId) => {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/campaigns/' + campaignId, {
+    return fetch(BASE_URL + '/api/v1/campaigns/' + campaignId, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.token}`

@@ -109,7 +109,7 @@ class Profile extends Component {
     }
     console.log(this.props.users)
     
-    const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.users.user.id}`
+    const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=https://access-health-api.herokuapp.com/api/v1/oauth/callback&state=${this.props.users.user.id}`
     
     if (this.props.users.user.stripe_uid && !this.props.users.stripeAct.error) {
     	return(
