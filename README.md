@@ -17,7 +17,7 @@
 
 ![Campaign Page](https://i.imgur.com/ybj2mEJ.png)
 
-Build with:
+Built with:
 - React
 - Redux
 - Rails
