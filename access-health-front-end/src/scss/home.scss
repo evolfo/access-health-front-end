@@ -7,8 +7,6 @@
 
   h3, h5 {
   	color: white;
-  	text-shadow: 1px 1px 3px black;
-
   }
 
   button {
@@ -17,8 +15,7 @@
   	font-size: 1.2rem;
   	color: white;
   	background: #3c518457;
-  	border-color: white;
-  	text-shadow: 1px 1px 3px black;
+  	border-color: #ffffff4f;  
   }
 }
 
@@ -54,8 +51,8 @@
     width: 100%;
   }
 
-  .MuiPaper-root-10 {
-    height: 40vh;
+  button > div {
+    min-height: 43vh;
   }
 
   #campaigns-to-support {
@@ -101,7 +98,7 @@
     width: 80%;
     margin: 0 auto;
     border-radius: 25px;
-    border: 1px solid #333;
+    border: 1px solid #33333354;
     
     h6 {
       display: inline-block;

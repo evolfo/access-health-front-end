@@ -1,5 +1,5 @@
 const initialState = {
-  term: ''
+  term: 'lowest-cost-to-complete'
 }
 
 export default function loadReducer(state = initialState, action) {
