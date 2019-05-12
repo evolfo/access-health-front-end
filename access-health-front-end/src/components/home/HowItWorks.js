@@ -64,7 +64,7 @@ function getCampaignStepContent(step) {
 
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 9 * 3 }}>
+    <Typography component="div" dir={dir} className="how-it-works-inner">
       {children}
     </Typography>
   );

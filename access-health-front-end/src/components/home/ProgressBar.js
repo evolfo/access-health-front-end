@@ -13,7 +13,7 @@ const ProgressBar = props => {
 	  	<div className="progress-bar">
 	  	  <Filler percentComplete={campaign.percent_complete} />
 	  	  <div className="goal-display">
-	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal} goal` : <p>$0/${campaign.goal}</p>} </span>
+	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal}` : <p>$0/${campaign.goal}</p>} </span>
 	  	  </div>
 	  	</div>
 	  )
@@ -23,7 +23,7 @@ const ProgressBar = props => {
 	  	<div className="progress-bar">
 	  	  <Filler percentComplete={campaign.percent_complete} />
 	  	  <div className="goal-display">
-	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal} goal` : <p>$0/${campaign.goal}</p>} </span>
+	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal}` : <p>$0/${campaign.goal}</p>} </span>
 	  	  </div>
 	  	</div>
 	  )
@@ -34,7 +34,7 @@ const ProgressBar = props => {
 	  	  <Typography variant="h6">
 	  	    {campaign.percent_complete}% done
 	  	  </Typography>
-	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal} goal` : <p>$0/${campaign.goal}</p>} </span>
+	  	  	<span>{campaign.current_amount ? `$${campaign.current_amount} of $${campaign.goal}` : <p>$0/${campaign.goal}</p>} </span>
 	  	</div>
 	  )
   } else {
