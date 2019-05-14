@@ -1,3 +1,31 @@
+// Media breakpoints 
+ @mixin breakpoint($point) {
+   @if $point == desktop {
+     @media (max-width: 72em) { @content ; }
+  }
+   @else if $point == desktopMin {
+     @media (min-width: 72em) { @content ; }
+  }
+   @else if $point == big {
+     @media (max-width: 100em) { @content ; }
+  }
+   @else if $point == laptop {
+     @media (max-width: 60em) { @content ; }
+  }
+    @else if $point == laptopMin {
+     @media (min-width: 60em) { @content ; }
+  }
+    @else if $point == tablet {
+     @media (max-width: 50em) { @content ; }
+  }
+   @else if $point == phablet {
+     @media (min-width: 37.5em)  { @content ; }
+  }
+  @else if $point == mobileonly {
+     @media (max-width: 37.5em)  { @content ; }
+  }
+}
+
 #browse-cards {
   .home-card {
   	min-height: 20vh;
@@ -7,6 +35,21 @@
 
   .browse-campaign-card {
     transition: 0.1s;
+
+    p {
+      margin-bottom: 11px;
+
+      @include breakpoint(laptop) {
+        font-size: 1.6rem;
+      }
+
+      @include breakpoint(tablet) {
+        font-size: 1.1rem;
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+        margin-bottom: 14px;
+      }
+    }
   }
 
   .browse-campaign-card:hover {
@@ -22,6 +65,12 @@
 .browse-campaigns {
   section {
   	padding: 6rem;
+
+    @include breakpoint(tablet) {
+      padding: 5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   .filter-container {
@@ -86,6 +135,11 @@
       width: 100%;
     }
   }
+}
+
+#campaign-page > div > div {
+  max-width: 100%;
+  flex-basis: 80%;
 }
 
 .campaign-page-card {

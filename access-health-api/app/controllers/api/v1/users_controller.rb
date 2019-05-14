@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find(id)
     @user.update!(stripe_uid: @response.params["stripe_user_id"]) if @response
     
-    redirect_to "http://localhost:3001/"
+    redirect_to "https://access-health.herokuapp.com/"
   end
 
   private

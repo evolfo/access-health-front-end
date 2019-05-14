@@ -111,13 +111,34 @@ $second-header-font-size: 1.2rem;
 
   button > div {
     min-height: 43vh;
+
+    @include breakpoint(laptop) {
+      min-height: 39vh;
+    }
+
+    @include breakpoint(tablet) {
+      min-height: 42vh;
+    }
   }
 
   #campaigns-to-support {
-  display: flex;
-  margin: 0 auto;
-  margin-top: 2rem;
-  text-align: center;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 2rem;
+    text-align: center;
+
+    @include breakpoint(desktop) {
+      max-width: 100%;
+    }
+
+    @include breakpoint(laptop) {
+      max-width: 66.66%;
+      flex-direction: column;
+    }
+
+    @include breakpoint(tablet) {
+      max-width: 100%;
+    }
   }
 
   #campaigns-to-support > a > div {
@@ -157,6 +178,10 @@ $second-header-font-size: 1.2rem;
     margin: 0 auto;
     border-radius: 25px;
     border: 1px solid #33333354;
+
+    @include breakpoint(desktop) {
+      width: 96%;
+    }
     
     h6 {
       display: inline-block;
@@ -211,8 +236,9 @@ $second-header-font-size: 1.2rem;
   background-size: cover;
 
   #no-padding{ 
-    max-width: 80%;
-    flex-basis: 80%;
+    @include breakpoint(desktopMin)
+      max-width: 80%;
+      flex-basis: 80%;
   }
 }
 

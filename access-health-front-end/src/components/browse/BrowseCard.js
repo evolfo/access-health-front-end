@@ -27,10 +27,6 @@ const BrowseCard = props => {
 	  marginTop: '-2px',
 	  backgroundColor: '#00000066',
   	},
-
-  	p: {
-  	  marginBottom: '11px'
-  	}
   }
   // Prevents completed campaigns from showing up on the browse page
   if (props.campaign.successful && props.fromBrowse) {
@@ -47,9 +43,9 @@ const BrowseCard = props => {
 		      />
 		      <div style={styles.overlay}>
 		        {props.campaign.title.length > 25 ? 
-		          <p style={styles.p}>{`${props.campaign.title.slice(0, 25) + '...'} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		          <p>{`${props.campaign.title.slice(0, 25) + '...'} // $${props.campaign.amount_left_to_fund} to go`}</p>
 		        :	
-		          <p style={styles.p}>{`${props.campaign.title} // $${props.campaign.amount_left_to_fund} left to fund`}</p>
+		          <p>{`${props.campaign.title} // $${props.campaign.amount_left_to_fund} to go`}</p>
 		        }
 		      </div>
 		      <CardContent>

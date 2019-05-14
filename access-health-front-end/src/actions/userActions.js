@@ -106,7 +106,7 @@ export const getStripeAct = (stripeUid) => {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Authorization": "Bearer " + process.env.REACT_APP_STRIPE_SECRET_KEY,
         "Stripe-Account": stripeUid
       }
     })
@@ -124,7 +124,7 @@ export const gettingStripeBalance = (stripeUid) => {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Authorization": "Bearer " + process.env.REACT_APP_STRIPE_SECRET_KEY,
         "Stripe-Account": stripeUid
       }
     })
@@ -141,7 +141,7 @@ export const gettingStripeBalanceHistory = (stripeUid) => {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer sk_test_OOGLW3DrfgOpxZtbFzMPnus900HMYLzQtw",
+        "Authorization": "Bearer " + process.env.REACT_APP_STRIPE_SECRET_KEY,
         "Stripe-Account": stripeUid
       }
     })
