@@ -14,7 +14,7 @@ const CampaignCard = props => {
       	<Card>
 	      <CardMedia
 	        className="home-card"
-	        image={`https://access-health-api.herokuapp.com${props.campaign.photoUrl}`}
+	        image={`http://localhost:3000/${props.campaign.photoUrl}`}
 	        title={props.campaign.title}
 	      />
 	      <CardContent>

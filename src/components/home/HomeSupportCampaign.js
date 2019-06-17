@@ -9,13 +9,13 @@ const HomeSupportCampaign = props => {
   let homeCampaignsGenerator
   let unfinishedCampaigns
 
-  if (props.campaigns.campaigns.status != 500) {
+  if (props.campaigns.campaigns.status != 500 && props.campaigns.campaigns[1]) {
     unfinishedCampaigns = props.campaigns.campaigns.filter(campaign => {
     	return campaign.successful === false
     })
   }
   console.log(props.campaigns.campaigns.status)
-  if (props.campaigns.campaigns.status != 500) {
+  if (props.campaigns.campaigns.status != 500 && props.campaigns.campaigns[1]) {
   // if (props.campaigns.campaigns.status != 500 || (unfinishedCampaigns[2] && unfinishedCampaigns[1])) {
 	  homeCampaignsGenerator = unfinishedCampaigns.slice(0, 3).map(campaign => {
 	  	let urlEnding = campaign.title.split(' ').join('-').toLowerCase()

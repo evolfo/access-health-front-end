@@ -1,4 +1,5 @@
 const baseURL = 'https://access-health-api.herokuapp.com/api/v1/'
+// const baseURL = 'http://localhost:3000/api/v1/'
 
 // DISPATCH
 
@@ -41,7 +42,6 @@ const getStripeBalanceHistory = stripeObj => {
 
 // THUNK
 
-
 //logging in
 export const getAuth = userInfo => {
   return dispatch => {
@@ -63,7 +63,6 @@ export const getAuth = userInfo => {
       .catch(error => dispatch(logInError(error)));
   };
 };
-
 
 //sign in
 export const newUser = userInfo => {
