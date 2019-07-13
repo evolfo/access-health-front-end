@@ -1,5 +1,35 @@
+ @mixin breakpoint($point) {
+   @if $point == desktop {
+     @media (max-width: 72em) { @content ; }
+  }
+   @else if $point == desktopMin {
+     @media (min-width: 72em) { @content ; }
+  }
+   @else if $point == big {
+     @media (max-width: 100em) { @content ; }
+  }
+   @else if $point == laptop {
+     @media (max-width: 60em) { @content ; }
+  }
+    @else if $point == laptopMin {
+     @media (min-width: 60em) { @content ; }
+  }
+    @else if $point == tablet {
+     @media (max-width: 50em) { @content ; }
+  }
+   @else if $point == phablet {
+     @media (min-width: 37.5em)  { @content ; }
+  }
+  @else if $point == mobileonly {
+     @media (max-width: 37.5em)  { @content ; }
+  }
+}
+
 #profile {
   padding: 2rem;
+  @include breakpoint(desktop) {
+    padding: 0rem;
+  }
 
   .profile-cards {
   	min-height: 20vh;
