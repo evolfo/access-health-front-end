@@ -101,7 +101,7 @@ $second-header-font-size: 1.2rem;
   }
 }
 
-.campaigns-to-support, {
+.campaigns-to-support {
 
   padding: 2rem;
 
@@ -115,10 +115,10 @@ $second-header-font-size: 1.2rem;
   }
 
   button > div {
-    min-height: 43vh;
+    min-height: 55vh;
 
     @include breakpoint(laptop) {
-      min-height: 39vh;
+      min-height: 47vh;
     }
 
     @include breakpoint(tablet) {
