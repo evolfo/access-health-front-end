@@ -103,12 +103,9 @@ class Browse extends Component {
 
         arr1.splice(1, 0, a)
         arr2.splice(1, 0, b)
-        console.log(arr1)
 
         arr1[0] = arr1[0].replace(/[A-Za-z]+$/, '')
         arr2[0] = arr2[0].replace(/[A-Za-z]+$/, '')
-
-        console.log(arr1.join(' '), arr2.join(' '))
 
         let dateA = new Date(arr1)
         let dateB = new Date(arr2)

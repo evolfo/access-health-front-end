@@ -35,7 +35,7 @@ const store = createStore(
   persistedReducer,
   compose(
   	applyMiddleware(thunk)
-  	)
+  )
 )
 
 const persistor = persistStore(store)
@@ -48,7 +48,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
 
 serviceWorker.unregister();
 

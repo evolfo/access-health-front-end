@@ -77,7 +77,6 @@ class HowItWorks extends Component {
   }
 
   getDonateSteps = () => {
-  	console.log(this.props.users.user)
     return [
       <span>Create an account and authenticate payments with {this.props.users.user && this.props.users.user.stripe_uid ? <Link to={`/profile/${this.props.users.user.first_name}`}>Stripe</Link> : 'Stripe'}</span>, 
       <span><Link to="/browse">Browse</Link> the Campaigns</span>, 

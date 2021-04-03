@@ -38,8 +38,10 @@ class Donate extends Component {
 
     this.props.loadingStart()
 
+    // Converts the amount to the correct dollar amount
   	const amount = this.state.donationAmount * 100
 
+    // Will be passed in and sent to charges_controller on the back end
   	const donationObj = {
   		amount: this.state.donationAmount,
   		user_id: this.props.users.user.id,
@@ -47,6 +49,7 @@ class Donate extends Component {
   		message: this.state.message
   	}
 
+    // this is a necessary unique token for the stripe API
   	const {token} = await this.props.stripe.createToken({name: this.props.users.user.first_name});
 
   	let response = await fetch('https://access-health-api.herokuapp.com/api/v1/charge', {

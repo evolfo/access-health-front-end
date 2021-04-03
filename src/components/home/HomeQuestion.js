@@ -9,7 +9,6 @@ import { loginModalOpen, loginModalClose, signupModalOpen, signupModalClose, str
 import StripeModal from '../StripeModal'
 
 const HomeQuestion = props => {
-	console.log(props.users.user)
 	if ((typeof props.users.user !== 'object' && props.users.user) && !props.users.user.stripe_uid) {
 	  return (
 	  	<React.Fragment>

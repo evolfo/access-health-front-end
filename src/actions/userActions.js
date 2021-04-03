@@ -16,7 +16,6 @@ export const logInPending = () => {
 };
 
 export const logInError = error => {
-  console.log(error);
   return { type: "LOG_IN_ERROR", payload: error }
 };
 

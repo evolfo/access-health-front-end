@@ -107,7 +107,6 @@ class Profile extends Component {
         display: 'flex'
       }
     }
-    console.log(this.props.users)
     
     const stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_ExRBTLkL6gQHmtUOhaXPDDdj8pGDqoIi&scope=read_write&redirect_uri=https://access-health-api.herokuapp.com/api/v1/oauth/callback&state=${this.props.users.user.id}`
     
